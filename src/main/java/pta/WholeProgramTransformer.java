@@ -36,6 +36,10 @@ public class WholeProgramTransformer extends SceneTransformer {
 			//if (sm.toString().contains("Hello")) {
 				//System.out.println(sm);
 				int allocId = 0;
+				if(sm.isJavaLibraryMethod()) {
+//					System.out.println(sm.toString());
+					continue;
+				}
 				if (sm.hasActiveBody()) {
 					for (Unit u : sm.getActiveBody().getUnits()) {
 //						System.out.println("S: " + u);
