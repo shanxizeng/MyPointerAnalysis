@@ -6,16 +6,41 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 public class AnswerPrinter {
-	
-	static void printAnswer(String answer) {
+
+	PrintStream ps;
+	String buffer;
+
+	AnswerPrinter(String file) {
 		try {
-			PrintStream ps = new PrintStream(
-				new FileOutputStream(new File("result.txt")));
-			ps.println(answer);
-			ps.close();
+			ps = new PrintStream(new FileOutputStream(new File(file)));
+			buffer = "";
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	void append(String str) {
+		buffer = buffer + str;
+	}
+
+	void append(Integer i) {
+		buffer = buffer + i;
+	}
+
+	void append(char ch) {
+		buffer = buffer + ch;
+	}
+
+	void append(char[] str) {
+		buffer = buffer + str;
+	}
+
+	void flush() {
+		ps.print(buffer);
+	}
+
+	void close() {
+		ps.close();
 	}
 
 }

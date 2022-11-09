@@ -25,7 +25,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 	@Override
 	protected void internalTransform(String arg0, Map<String, String> arg1) {
 		System.out.println(arg0);
-		/*
+
 		TreeMap<Integer, Local> queries = new TreeMap<Integer, Local>();
 		Anderson anderson = new Anderson(); 
 		
@@ -38,8 +38,8 @@ public class WholeProgramTransformer extends SceneTransformer {
 				int allocId = 0;
 				if (sm.hasActiveBody()) {
 					for (Unit u : sm.getActiveBody().getUnits()) {
-						System.out.println("S: " + u);
-						System.out.println(u.getClass());
+//						System.out.println("S: " + u);
+//						System.out.println(u.getClass());
 						if (u instanceof InvokeStmt) {
 							InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
 							if (ie.getMethod().toString().equals("<benchmark.internal.BenchmarkN: void alloc(int)>")) {
@@ -66,17 +66,18 @@ public class WholeProgramTransformer extends SceneTransformer {
 		}
 		
 		anderson.run();
-		String answer = "";
+		AnswerPrinter printer=new AnswerPrinter("result.txt");
 		for (Entry<Integer, Local> q : queries.entrySet()) {
 			TreeSet<Integer> result = anderson.getPointsToSet(q.getValue());
-			answer += q.getKey().toString() + ":";
+			printer.append( q.getKey().toString() + ":" );
 			for (Integer i : result) {
-				answer += " " + i;
+				printer.append( " " + i );
 			}
-			answer += "\n";
+			printer.append( "\n" );
 		}
-		AnswerPrinter.printAnswer(answer);
-		*/
+		printer.flush();
+		printer.close();
+
 	}
 
 }
