@@ -9,17 +9,17 @@ import java.util.TreeSet;
 import soot.Local;
 
 class AssignConstraint {
-	Local from, to;
-	AssignConstraint(Local from, Local to) {
+	Object from, to;
+	AssignConstraint(Object from, Object to) {
 		this.from = from;
 		this.to = to;
 	}
 }
 
 class NewConstraint {
-	Local to;
+	Object to;
 	int allocId;
-	NewConstraint(int allocId, Local to) {
+	NewConstraint(int allocId, Object to) {
 		this.allocId = allocId;
 		this.to = to;
 	}
@@ -28,11 +28,14 @@ class NewConstraint {
 public class Anderson {
 	private List<AssignConstraint> assignConstraintList = new ArrayList<AssignConstraint>();
 	private List<NewConstraint> newConstraintList = new ArrayList<NewConstraint>();
-	Map<Local, TreeSet<Integer>> pts = new HashMap<Local, TreeSet<Integer>>();
-	void addAssignConstraint(Local from, Local to) {
+	Map<Object, TreeSet<Integer>> pts = new HashMap<Object, TreeSet<Integer>>();
+	void addAssignConstraint(Object from, Object to) {
 		assignConstraintList.add(new AssignConstraint(from, to));
 	}
-	void addNewConstraint(int alloc, Local to) {
+	void addNewConstraint(int alloc, Object to) {
+		if(alloc==0) {
+			System.out.println("zero::::"+to.toString());
+		}
 		newConstraintList.add(new NewConstraint(alloc, to));		
 	}
 	void run() {
@@ -57,7 +60,10 @@ public class Anderson {
 			}
 		}
 	}
-	TreeSet<Integer> getPointsToSet(Local local) {
+	TreeSet<Integer> getPointsToSet(Object local) {
+		if(!pts.containsKey(local)) {
+			System.out.println(local.toString());
+		}
 		return pts.get(local);
 	}
 	

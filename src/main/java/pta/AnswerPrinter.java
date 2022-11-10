@@ -37,6 +37,7 @@ public class AnswerPrinter {
 
 	void flush() {
 		ps.print(buffer);
+		buffer="";
 	}
 
 	void close() {
