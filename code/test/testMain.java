@@ -51,6 +51,27 @@ class A {
 
 }
 
+class Base {
+    A x=new A(),y=new A();
+
+    public void setx(A z) {
+        x=z;
+    }
+
+    public A getx() {
+        return x;
+    }
+}
+
+class C extends Base {
+    public A getx() {
+        return y;
+    }
+    public void sety(A a) {
+        y=a;
+    }
+}
+
 public class testMain {
 
     static A f() {
@@ -63,10 +84,16 @@ public class testMain {
     public static void main(String[] args) {
         BenchmarkN.alloc(1);
         A a = new A();
-
-        if (1 + 1 > 1) {
-            a = f();
-        }
-        BenchmarkN.test(1, a);
+        BenchmarkN.alloc(2);
+        Base b=new Base();
+        b.setx(a);
+        BenchmarkN.alloc(3);
+        C c=new C();
+        c.sety(a);
+        BenchmarkN.alloc(4);
+        A x=new A();
+        c.setx(x);
+        A d=c.getx();
+        BenchmarkN.test(1, d);
     }
 }

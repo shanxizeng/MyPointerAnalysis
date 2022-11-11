@@ -69,15 +69,11 @@ public class WholeProgramTransformer extends SceneTransformer {
 							System.out.println("Method::" + ie.toString());
 							if (ie.getArgs().size() > 0) {
 								for (int i = 0; i < ie.getArgs().size(); i++) {
-									anderson.addAssignConstraint(
-											(Object) ie.getArg(i),
-											(Object) ie.getMethod().getActiveBody().getParameterRefs().get(i)
-									);
-									cfl.addAssign((Object) ie.getArg(i),
-											(Object) ie.getMethod().getActiveBody().getParameterRefs().get(i));
-									System.out.println(ie.getArg(i).toString() + " " +
-											ie.getMethod().getActiveBody().getParameterRefs().get(i).toString());
-									System.out.println(ie.getMethod().getActiveBody().getParameterRefs().get(i).getClass().toString());
+									Value pr=ie.getMethod().getActiveBody().getParameterRefs().get(i);
+									anderson.addAssignConstraint((Object) ie.getArg(i), (Object) pr);
+									cfl.addAssign((Object) ie.getArg(i), (Object) pr);
+									System.out.println("5:"+ie.getArg(i).toString() + " " +pr.toString());
+									System.out.println(pr.getClass().toString());
 								}
 							}
 							if (!ie.getMethod().isStatic() && ie instanceof SpecialInvokeExpr) {
@@ -86,6 +82,14 @@ public class WholeProgramTransformer extends SceneTransformer {
 								}
 								SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
 								System.out.println("1: " + sie.getBase() + ":" + ie.getMethod());
+								calling.get(ie.getMethod()).add((Object) sie.getBase());
+							}
+							if (!ie.getMethod().isStatic() && ie instanceof VirtualInvokeExpr) {
+								if (!calling.containsKey(ie.getMethod())) {
+									calling.put(ie.getMethod(), new LinkedList<Object>());
+								}
+								VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
+								System.out.println("9: " + sie.getBase() + ":" + ie.getMethod());
 								calling.get(ie.getMethod()).add((Object) sie.getBase());
 							}
 						}
@@ -139,7 +143,29 @@ public class WholeProgramTransformer extends SceneTransformer {
 							InvokeStmt is=(InvokeStmt) rop;
 							anderson.addAssignConstraint((Object) is.getInvokeExpr().getMethod(), (Object) lop);
 							cfl.addAssign((Object) is.getInvokeExpr().getMethod(), (Object) lop);
-							System.out.println("???" + u.toString());
+							System.out.println("4:"+is.getClass()+":"+is.toString());
+						} else if (lop instanceof Local && rop instanceof InvokeExpr) {
+							InvokeExpr is=(InvokeExpr) rop;
+							List<Value> rp=is.getArgs();
+							for(int i=0;i<is.getMethod().getParameterCount();i++) {
+								anderson.addAssignConstraint((Object) rp.get(i),
+										(Object) is.getMethod().getActiveBody().getParameterLocal(i));
+							}
+							if(is instanceof VirtualInvokeExpr) {
+								if(calling.containsKey(is.getMethod())) {
+									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
+								}
+								else {
+									calling.put(is.getMethod(),new LinkedList<Object>());
+									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
+								}
+							}
+							else {
+								System.out.println("8:"+is.toString());
+							}
+							anderson.addAssignConstraint((Object) is.getMethod(), (Object) lop);
+							cfl.addAssign((Object) is.getMethod(), (Object) lop);
+							System.out.println("6:"+is.getClass()+":"+is.toString());
 						} else if(lop instanceof Local && rop instanceof ParameterRef) {
 							anderson.addAssignConstraint((Object) rop,(Object) lop);
 							cfl.addAssign((Object) rop,(Object) lop);
@@ -153,6 +179,9 @@ public class WholeProgramTransformer extends SceneTransformer {
 									System.out.println("2:"+o.toString());
 								}
 							}
+							else {
+								System.out.println("7:"+sm.toString());
+							}
 						}
 						else {
 							System.out.println("???" + u.toString());
@@ -165,7 +194,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 						}
 						else {
 							System.out.println("aaaaaaaaaaaaaaa");
-							System.out.println(rs.getOp().toString());
+							System.out.println(rs.getOp().toString()+":"+sm.toString()+":"+sm.getClass());
 							anderson.addAssignConstraint((Object) rs.getOp(),(Object)sm);
 							cfl.addAssign((Object) rs.getOp(),(Object)sm);
 						}
