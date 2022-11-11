@@ -104,17 +104,35 @@ public class WholeProgramTransformer extends SceneTransformer {
 							System.out.println(rop.toString() + rop.getType().toString() + " " +
 									lop.toString() + lop.getType().toString());
 						} else if (lop instanceof Local && rop instanceof FieldRef) {
-							AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) rop;
-							System.out.println("FieldRef " + f.getField().getName() + " " + f.getFieldRef().name());
-							anderson.addAssignConstraint((Object) f.getField(), (Object) lop);
-							cfl.addGet((Object) f.getBase(),(Object) lop, (Object) f.getField());
-							System.out.println(rop.getClass());
-							System.out.println(rop.toString() + rop.getType().toString() + " " +
-									lop.toString() + lop.getType().toString());
+							if(rop instanceof AbstractInstanceFieldRef) {
+								AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) rop;
+								System.out.println("FieldRef " + f.getField().getName() + " " + f.getFieldRef().name());
+								anderson.addAssignConstraint((Object) f.getField(), (Object) lop);
+								cfl.addGet((Object) f.getBase(), (Object) lop, (Object) f.getField());
+								System.out.println(rop.getClass());
+								System.out.println(rop.toString() + rop.getType().toString() + " " +
+										lop.toString() + lop.getType().toString());
+							}
+							else {
+								FieldRef f = (FieldRef) rop;
+								System.out.println("FieldRef " + f.getField().getName() + " " + f.getFieldRef().name());
+								anderson.addAssignConstraint((Object) f.getField(), (Object) lop);
+								cfl.addAssign((Object) f.getField(), (Object) lop);
+								System.out.println(rop.getClass());
+								System.out.println(rop.toString() + rop.getType().toString() + " " +
+										lop.toString() + lop.getType().toString());
+							}
 						} else if (lop instanceof FieldRef && rop instanceof Local) {
-							AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) lop;
-							anderson.addAssignConstraint((Object) rop, (Object) f.getField());
-							cfl.addPut((Object) rop,(Object) f.getBase(), (Object) f.getField());
+							if(lop instanceof AbstractInstanceFieldRef) {
+								AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) lop;
+								anderson.addAssignConstraint((Object) rop, (Object) f.getField());
+								cfl.addPut((Object) rop, (Object) f.getBase(), (Object) f.getField());
+							}
+							else {
+								FieldRef f = (FieldRef) lop;
+								anderson.addAssignConstraint((Object) rop, (Object) f.getField());
+								cfl.addAssign((Object) rop, (Object) f.getField());
+							}
 						} else if (lop instanceof FieldRef && rop instanceof FieldRef) {
 							System.out.println("??????????");
 						} else if (lop instanceof Local && rop instanceof InvokeStmt) {

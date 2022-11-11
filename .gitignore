@@ -2,3 +2,4 @@ target/*
 sootOutput/*
 result.txt
 log.txt
+cflInfo.txt
