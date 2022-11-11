@@ -51,6 +51,13 @@ public class FieldSensitivity {
     BenchmarkN.test(2, a1.f);
     BenchmarkN.test(3, a2.f);
   }
+
+
+  public A f(B x) {
+    A res = new A(x);
+    return res;
+  }
+
   
 
   public static void main(String[] args) {

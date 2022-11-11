@@ -14,12 +14,7 @@ import soot.SceneTransformer;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
-import soot.jimple.DefinitionStmt;
-import soot.jimple.IntConstant;
-import soot.jimple.InvokeExpr;
-import soot.jimple.InvokeStmt;
-import soot.jimple.NewExpr;
-import soot.jimple.FieldRef;
+import soot.jimple.*;
 import soot.jimple.toolkits.callgraph.ReachableMethods;
 import soot.util.queue.QueueReader;
 
@@ -45,6 +40,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 //					System.out.println(sm.toString());
 				continue;
 			}
+			System.out.println(sm.toString());
 			if (sm.hasActiveBody()) {
 				debugInfo.append("------------");
 				debugInfo.append("function:" + sm.getDeclaringClass().toString() + "::" + sm.getName() + '\n');
@@ -55,51 +51,81 @@ public class WholeProgramTransformer extends SceneTransformer {
 					if (u instanceof InvokeStmt) {
 						InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
 						if (ie.getMethod().toString().equals
-								("<benchmark.internal.BenchmarkN: void alloc(int)>")) {
+								("<benchmark.internal.BenchmarkN: void alloc(int)>")||
+							ie.getMethod().toString().equals
+									("<test.BenchmarkN: void alloc(int)>")) {
 							allocId = ((IntConstant) ie.getArgs().get(0)).value;
 							Ids.add(allocId);
 						} else if (ie.getMethod().toString().equals
-								("<benchmark.internal.BenchmarkN: void test(int,java.lang.Object)>")) {
+								("<benchmark.internal.BenchmarkN: void test(int,java.lang.Object)>")||
+								ie.getMethod().toString().equals
+										("<test.BenchmarkN: void test(int,java.lang.Object)>")) {
 							Value v = ie.getArgs().get(1);
 							int id = ((IntConstant) ie.getArgs().get(0)).value;
 							queries.put(id, (Object) v);
 						} else {
-
+							System.out.println("Method::"+ie.toString());
+							if(ie.getArgs().size()>0) {
+								for(int i=0;i<ie.getArgs().size();i++) {
+									anderson.addAssignConstraint(
+											(Object)ie.getArg(i),
+											(Object)ie.getMethod().getActiveBody().getParameterRefs().get(i)
+									);
+									System.out.println(ie.getArg(i).toString()+" "+
+											ie.getMethod().getActiveBody().getParameterRefs().get(i).toString());
+									System.out.println(ie.getMethod().getActiveBody().getParameterRefs().get(i).getClass().toString());
+								}
+							}
 						}
-					}
-					else if (u instanceof DefinitionStmt) {
+					} else if (u instanceof DefinitionStmt) {
 						DefinitionStmt ds = (DefinitionStmt) u;
-						Value rop=ds.getRightOp();
-						Value lop=ds.getLeftOp();
+						Value rop = ds.getRightOp();
+						Value lop = ds.getLeftOp();
 						if (rop instanceof NewExpr) {
 							//System.out.println("Alloc " + allocId);
 							anderson.addNewConstraint(allocId, (Object) ds.getLeftOp());
-						}
-						else if (lop instanceof Local && rop instanceof Local) {
+							allocId = 0;
+						} else if (lop instanceof Local && rop instanceof Local) {
 							anderson.addAssignConstraint((Object) rop, (Object) lop);
-							System.out.println(rop.toString()+rop.getType().toString()+" "+
-									lop.toString()+lop.getType().toString());
-						}
-						else if (lop instanceof Local && rop instanceof FieldRef) {
-							FieldRef f=(FieldRef) rop;
-							System.out.println("FieldRef "+f.getField().getName()+" "+f.getFieldRef().name());
-							anderson.addAssignConstraint((Object) f.getField(),(Object) lop);
-							System.out.println(rop.toString()+rop.getType().toString()+" "+
-									lop.toString()+lop.getType().toString());
-						}
-						else if (lop instanceof FieldRef && rop instanceof Local) {
-							FieldRef f=(FieldRef) lop;
-							anderson.addAssignConstraint((Object) rop,(Object) f.getField());
-						}
-						else if (lop instanceof FieldRef && rop instanceof FieldRef) {
+							System.out.println(rop.toString() + rop.getType().toString() + " " +
+									lop.toString() + lop.getType().toString());
+						} else if (lop instanceof Local && rop instanceof FieldRef) {
+							FieldRef f = (FieldRef) rop;
+							System.out.println("FieldRef " + f.getField().getName() + " " + f.getFieldRef().name());
+							anderson.addAssignConstraint((Object) f.getField(), (Object) lop);
+							System.out.println(rop.toString() + rop.getType().toString() + " " +
+									lop.toString() + lop.getType().toString());
+						} else if (lop instanceof FieldRef && rop instanceof Local) {
+							FieldRef f = (FieldRef) lop;
+							anderson.addAssignConstraint((Object) rop, (Object) f.getField());
+						} else if (lop instanceof FieldRef && rop instanceof FieldRef) {
 							System.out.println("??????????");
+						} else if (lop instanceof Local && rop instanceof InvokeStmt) {
+							InvokeStmt is=(InvokeStmt) rop;
+							anderson.addAssignConstraint((Object) is.getInvokeExpr().getMethod(), (Object) lop);
+							System.out.println("???" + u.toString());
+						} else if(lop instanceof Local && rop instanceof ParameterRef) {
+							anderson.addAssignConstraint((Object) rop,(Object) lop);
+							System.out.println(rop.toString() + rop.getType().toString() + " " +
+									lop.toString() + lop.getType().toString());
+							System.out.println(".................");
 						}
 						else {
-							System.out.println("???"+u.toString());
+							System.out.println("???" + u.toString());
+						}
+					} else if(u instanceof ReturnStmt) {
+						ReturnStmt rs=(ReturnStmt) u;
+						if(sm.getReturnType()==null) {
+							System.out.println("!!!!!!!!!!!!");
+						}
+						else {
+							System.out.println("aaaaaaaaaaaaaaa");
+							System.out.println(rs.getOp().toString());
+							anderson.addAssignConstraint((Object) rs.getOp(),(Object)sm);
 						}
 					}
 					else {
-						System.out.println("???"+u.toString());
+						System.out.println("???" + u.toString());
 					}
 				}
 			}
@@ -113,19 +139,18 @@ public class WholeProgramTransformer extends SceneTransformer {
 		for (Entry<Integer, Object> q : queries.entrySet()) {
 			System.out.println(q.getKey().intValue());
 			TreeSet<Integer> result = anderson.getPointsToSet(q.getValue());
-			if(result==null) {
+			if (result == null) {
 				printer.append(q.getKey().toString() + ":");
 				for (Integer i : Ids) {
-					if(i!=0)
+					if (i != 0)
 						printer.append(" " + i);
 				}
 				printer.append("\n");
-			}
-			else {
+			} else {
 				System.out.println(result.size());
 				printer.append(q.getKey().toString() + ":");
 				for (Integer i : result) {
-					if(i!=0)
+					if (i != 0)
 						printer.append(" " + i);
 				}
 				printer.append("\n");
@@ -133,7 +158,6 @@ public class WholeProgramTransformer extends SceneTransformer {
 		}
 		printer.flush();
 		printer.close();
-
 	}
 
 }
