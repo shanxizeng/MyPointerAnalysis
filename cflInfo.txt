@@ -1,0 +1,236 @@
+r2:2
+$r6:21
+@parameter1: java.lang.Object:42
+$r1:58
+r5:19
+r1:28
+<jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String toString()>:59
+@parameter0: java.lang.String[]:1
+r0:55
+$r2:56
+$r4:18
+r7:22
+r3:50
+@parameter0: int:6
+@parameter0: benchmark.objects.B:15
+$r6:36
+$r2:14
+$r2:30
+r3:31
+r8:9
+$r9:39
+r1:5
+@parameter0: benchmark.objects.A:23
+r1:12
+@parameter1: benchmark.objects.A:24
+$r0:27
+$r1:51
+$r1:46
+$r0:11
+$r4:33
+r3:16
+$r8:38
+$r0:4
+r7:37
+@parameter0: int:40
+i0:7
+r0:49
+r0:57
+r3:53
+r0:8
+r5:34
+$r2:52
+r0:44
+r1:54
+r9:25
+r0:43
+$r2:47
+r0:48
+i0:41
+0:45
+1:10
+2:13
+3:17
+4:20
+5:26
+6:29
+7:32
+8:35
+9:3
+1:
+	2:Assign null false
+2:
+	1:Assign null true
+3:
+	4:New null false
+4:
+	8:Assign null false
+	5:Assign null false
+	3:New null true
+5:
+	9:Assign null false
+	4:Assign null true
+6:
+	7:Assign null false
+7:
+	6:Assign null true
+8:
+	4:Assign null true
+9:
+	53:Assign null false
+	5:Assign null true
+10:
+	11:New null false
+11:
+	48:Assign null false
+	12:Assign null false
+	10:New null true
+12:
+	15:Assign null false
+	11:Assign null true
+13:
+	14:New null false
+14:
+	49:Assign null false
+	16:Assign null false
+	13:New null true
+15:
+	50:Assign null false
+	12:Assign null true
+16:
+	23:Assign null false
+	14:Assign null true
+17:
+	18:New null false
+18:
+	44:Assign null false
+	19:Assign null false
+	17:New null true
+19:
+	25:Get <benchmark.objects.A: benchmark.objects.B f> false
+	24:Assign null false
+	18:Assign null true
+20:
+	21:New null false
+21:
+	48:Assign null false
+	22:Assign null false
+	20:New null true
+22:
+	21:Assign null true
+23:
+	54:Assign null false
+	16:Assign null true
+24:
+	55:Assign null false
+	19:Assign null true
+25:
+	19:Get <benchmark.objects.A: benchmark.objects.B f> true
+26:
+	27:New null false
+27:
+	48:Assign null false
+	28:Assign null false
+	26:New null true
+28:
+	34:Put <benchmark.objects.A: benchmark.objects.B f> false
+	27:Assign null true
+29:
+	30:New null false
+30:
+	48:Assign null false
+	31:Assign null false
+	29:New null true
+31:
+	37:Put <benchmark.objects.A: benchmark.objects.B f> false
+	30:Assign null true
+32:
+	33:New null false
+33:
+	44:Assign null false
+	34:Assign null false
+	32:New null true
+34:
+	38:Get <benchmark.objects.A: benchmark.objects.B f> false
+	28:Put <benchmark.objects.A: benchmark.objects.B f> true
+	33:Assign null true
+35:
+	36:New null false
+36:
+	44:Assign null false
+	37:Assign null false
+	35:New null true
+37:
+	39:Get <benchmark.objects.A: benchmark.objects.B f> false
+	31:Put <benchmark.objects.A: benchmark.objects.B f> true
+	36:Assign null true
+38:
+	34:Get <benchmark.objects.A: benchmark.objects.B f> true
+39:
+	37:Get <benchmark.objects.A: benchmark.objects.B f> true
+40:
+	41:Assign null false
+41:
+	40:Assign null true
+42:
+	43:Assign null false
+43:
+	42:Assign null true
+44:
+	47:Put <benchmark.objects.A: benchmark.objects.B g> true
+	46:Put <benchmark.objects.A: benchmark.objects.B f> true
+	36:Assign null true
+	33:Assign null true
+	18:Assign null true
+45:
+	52:New null false
+	51:New null false
+	47:New null false
+	46:New null false
+46:
+	48:Assign null false
+	44:Put <benchmark.objects.A: benchmark.objects.B f> false
+	45:New null true
+47:
+	48:Assign null false
+	44:Put <benchmark.objects.A: benchmark.objects.B g> false
+	45:New null true
+48:
+	47:Assign null true
+	46:Assign null true
+	30:Assign null true
+	27:Assign null true
+	21:Assign null true
+	11:Assign null true
+49:
+	50:Put <benchmark.objects.A: benchmark.objects.B f> true
+	52:Put <benchmark.objects.A: benchmark.objects.B g> true
+	51:Put <benchmark.objects.A: benchmark.objects.B f> true
+	14:Assign null true
+50:
+	49:Put <benchmark.objects.A: benchmark.objects.B f> false
+	15:Assign null true
+51:
+	49:Put <benchmark.objects.A: benchmark.objects.B f> false
+	45:New null true
+52:
+	49:Put <benchmark.objects.A: benchmark.objects.B g> false
+	45:New null true
+53:
+	9:Assign null true
+54:
+	56:Get <benchmark.objects.A: benchmark.objects.B f> false
+	23:Assign null true
+55:
+	56:Put <benchmark.objects.A: benchmark.objects.B f> true
+	24:Assign null true
+56:
+	55:Put <benchmark.objects.A: benchmark.objects.B f> false
+	54:Get <benchmark.objects.A: benchmark.objects.B f> true
+57:
+	58:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> false
+58:
+	59:Assign null false
+	57:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> true
+59:
+	58:Assign null true
