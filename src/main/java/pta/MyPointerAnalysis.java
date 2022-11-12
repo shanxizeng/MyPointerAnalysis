@@ -19,7 +19,7 @@ public class MyPointerAnalysis {
 		PackManager.v().getPack("wjtp").add(new Transform("wjtp.mypta", new WholeProgramTransformer()));
 		soot.Main.main(new String[] {
 			"-w",
-			"-p", "cg.spark", "enabled:true",
+//			"-p", "cg.spark", "enabled:true",
 			"-p", "wjtp.mypta", "enabled:true",
 			"-soot-class-path", classpath,
 			args[1]

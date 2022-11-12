@@ -43,7 +43,7 @@ class EdgeType {
                     break;
                 }
                 case Get: {
-                    if (t.Type == type.Point3 && f.equals(t.f) && !t.reversed) {
+                    if (t.Type == type.Point3 && ((f == null && t.f == null) || (f != null && t.f != null && f.equals(t.f))) && !t.reversed) {
                         res.Type = type.Point2;
                         res.f = t.f;
                     }
@@ -72,7 +72,7 @@ class EdgeType {
                     break;
                 }
                 case Put: {
-                    if (t.Type == type.Flow3 && f.equals(t.f) && !t.reversed) {
+                    if (t.Type == type.Flow3 && ((f == null && t.f == null) || (f != null && t.f != null && f.equals(t.f))) && !t.reversed) {
                         res.Type = type.Flow2;
                         res.f = t.f;
                     }
@@ -167,6 +167,7 @@ class Graph {
         from[tot] = v;
         w[tot] = wi.reverse();
         first[v] = tot++;
+        if(tot%10000<=1) System.out.println(tot);
     }
 
     Graph(int n, int m) {

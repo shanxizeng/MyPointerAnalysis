@@ -23,8 +23,17 @@ public class AnswerPrinter {
 		buffer = buffer + str;
 	}
 
+	void appendln(String str) {
+		buffer = buffer + str + "\n";
+	}
+
 	void append(Integer i) {
 		buffer = buffer + i;
+	}
+
+
+	void appendln(Integer i) {
+		buffer = buffer + i + "\n";
 	}
 
 	void append(char ch) {
