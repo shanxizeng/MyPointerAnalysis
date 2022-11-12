@@ -53,6 +53,7 @@ class A {
 
 class Base {
     A x=new A(),y=new A();
+    public int n=1;
 
     public void setx(A z) {
         x=z;
@@ -66,7 +67,16 @@ class Base {
     }
 }
 
-class C extends Base {
+class Mid extends Base {
+    public int n=2;
+//    public A getx() {
+//        BenchmarkN.alloc(4);
+//        A a = new A();
+//        return a;
+//    }
+}
+
+class C extends Mid {
     public A getx() {
         return y;
     }
@@ -83,23 +93,16 @@ public class testMain {
 
     public static void main(String[] args) {
         BenchmarkN.alloc(1);
-        A a = new A();
-        BenchmarkN.alloc(6);
-        A aa = new A();
+        Mid c = new C();
         BenchmarkN.alloc(2);
-        Base b=new Base();
-        b.setx(aa);
+        A a = new A();
         BenchmarkN.alloc(3);
-        Base c=new C();
-        if(args.length>1) {
-            BenchmarkN.alloc(5);
-            c=new Base();
-        }
-        c.sety(a);
-        BenchmarkN.alloc(4);
-        A x=new A();
-        c.setx(x);
-        A d=c.getx();
+        A b = new A();
+        c.setx(a);
+        c.sety(b);
+        A d = c.getx();
         BenchmarkN.test(1, d);
+        Base m = new Mid();
+        System.out.println(m.n);
     }
 }

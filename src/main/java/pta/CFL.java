@@ -114,26 +114,25 @@ class EdgeType {
     }
 
     void print(AnswerPrinter printer) {
-        if(f!=null)
+        if (f != null)
             printer.append(Type.toString() + " " + f.toString() + " " + reversed + "\n");
         else
             printer.append(Type.toString() + " null " + reversed + "\n");
     }
 
     void print2(AnswerPrinter printer) {
-        if(f!=null) {
-            printer.append(Type.toString() + ((SootField)f).getName());
-        }
-        else
+        if (f != null) {
+            printer.append(Type.toString() + ((SootField) f).getName());
+        } else
             printer.append(Type.toString());
     }
 
     boolean isVoid() {
-        return Type==type.Void;
+        return Type == type.Void;
     }
 
     boolean same(EdgeType t) {
-        return t.Type == Type && ((f == null && t.f == null) || f.equals(t.f)) && reversed == t.reversed;
+        return t.Type == Type && ((f == null && t.f == null) || (f != null && t.f != null && f.equals(t.f))) && reversed == t.reversed;
     }
 
 }
@@ -301,40 +300,45 @@ public class CFL {
         g.add2(x1, x2, new EdgeType(EdgeType.type.New));
     }
 
-    void run() {
-        AnswerPrinter printer = new AnswerPrinter("cflInfo.txt");
-        AnswerPrinter dotter = new AnswerPrinter("cflInfo.dot");
-        dotter.append("digraph cfl{\n");
-        for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
-            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+    void run(boolean debugMode) {
+        if(debugMode) {
+            AnswerPrinter printer = new AnswerPrinter("cflInfo.txt");
+            AnswerPrinter dotter = new AnswerPrinter("cflInfo.dot");
+            dotter.append("digraph cfl{\n");
+            for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
+                printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+            }
+            for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
+                printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+            }
+            g.print(printer, dotter, cnt);
+            dotter.append("}\n");
+            dotter.flush();
+            dotter.close();
+            printer.flush();
+            for (int i = 1; i <= cnt; i++) {
+                g.add2(i, i, new EdgeType(EdgeType.type.Flow1));
+                g.add2(i, i, new EdgeType(EdgeType.type.Point1));
+            }
+            g.trans();
+            AnswerPrinter dotter2 = new AnswerPrinter("cflInfo2.dot");
+            dotter2.append("digraph cfl{\n");
+            for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
+                printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+            }
+            for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
+                printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+            }
+            g.print(printer, dotter2, cnt);
+            dotter2.append("}\n");
+            dotter2.flush();
+            printer.flush();
+            printer.close();
+            dotter2.close();
         }
-        for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
-            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+        else {
+            g.trans();
         }
-        g.print(printer, dotter, cnt);
-        dotter.append("}\n");
-        dotter.flush();
-        dotter.close();
-        printer.flush();
-        for (int i = 1; i <= cnt; i++) {
-            g.add2(i, i, new EdgeType(EdgeType.type.Flow1));
-            g.add2(i, i, new EdgeType(EdgeType.type.Point1));
-        }
-        g.trans();
-        AnswerPrinter dotter2 = new AnswerPrinter("cflInfo2.dot");
-        dotter2.append("digraph cfl{\n");
-        for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
-            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
-        }
-        for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
-            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
-        }
-        g.print(printer, dotter2, cnt);
-        dotter2.append("}\n");
-        dotter2.flush();
-        printer.flush();
-        printer.close();
-        dotter2.close();
     }
 
     TreeSet<Integer> getPointsToSet(Object local) {
