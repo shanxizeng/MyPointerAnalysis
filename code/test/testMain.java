@@ -90,6 +90,8 @@ interface I {
     // G and H implement I
 
     public A foo(A a);
+
+    public A get();
 }
 
 class H implements I {
@@ -101,6 +103,9 @@ class H implements I {
         this.a = a;
         return a;
     }
+    public A get() {
+        return a;
+    }
 }
 
 class G implements I {
@@ -110,6 +115,9 @@ class G implements I {
 
     public A foo(A a) {
         this.a = a;
+        return a;
+    }
+    public A get() {
         return a;
     }
 }
@@ -134,11 +142,6 @@ class Base {
 
 class Mid extends Base {
     public int n=2;
-//    public A getx() {
-//        BenchmarkN.alloc(4);
-//        A a = new A();
-//        return a;
-//    }
 }
 
 class C extends Mid {
@@ -147,26 +150,31 @@ class C extends Mid {
     }
 }
 
-public class testMain {
-
-    static void swapf(A a1, A a2) {
-        B tmp;
-        tmp = a1.f;
-        a1.f = a2.f;
-        a2.f = tmp;
-        return;
-    }
-
+class testMain {
     public static void main(String[] args) {
-        BenchmarkN.alloc(2);
-        I a = new G();
-        BenchmarkN.alloc(3);
-        I b = new H();
-        BenchmarkN.alloc(4);
-        A c = new A();
-        b.foo(a.foo(c));
-        BenchmarkN.alloc(5);
-        A d = new A();
-        BenchmarkN.test(1, a.foo(d));
+        new Child("520");//输出结果为：132
+        new Child(); // 输出结果为：14
+    }
+}
+
+class People {
+    String name;
+    public People() {
+        System.out.print(1);
+    }
+    public People(String name) {
+        System.out.print(2);
+        this.name = name;
+    }
+}
+class Child extends People {
+    People father;
+    public Child(String name) {
+        System.out.print(3);
+        this.name = name;
+        father = new People(name + ":F");
+    }
+    public Child(){
+        System.out.print(4);
     }
 }

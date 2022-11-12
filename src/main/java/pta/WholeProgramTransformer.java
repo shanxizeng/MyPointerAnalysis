@@ -11,6 +11,19 @@ import soot.jimple.internal.*;
 
 public class WholeProgramTransformer extends SceneTransformer {
 
+	private void getSuperInterfaces(SootClass sc, SootMethod sm, Map<SootMethod, List<SootMethod>> maybeCalling) {
+		for(SootClass i : sc.getInterfaces()) {
+			if (i.declaresMethod(sm.getName(), sm.getParameterTypes())) {
+				SootMethod temp = i.getMethod(sm.getName(), sm.getParameterTypes());
+				if (temp.isFinal()) break;
+				if (!maybeCalling.containsKey(temp))
+					maybeCalling.put(temp, new LinkedList<SootMethod>());
+				maybeCalling.get(temp).add(sm);
+			}
+			getSuperInterfaces(i,sm,maybeCalling);
+		}
+	}
+
 	@Override
 	protected void internalTransform(String arg0, Map<String, String> arg1) {
 		System.out.println(arg0);
@@ -29,23 +42,14 @@ public class WholeProgramTransformer extends SceneTransformer {
 				continue;
 			}
 			SootClass sc = sm.getDeclaringClass();
-			for(SootClass i : sc.getInterfaces()) {
-				if(i.declaresMethod(sm.getName(),sm.getParameterTypes())) {
-					System.out.println(i+":"+sc);
-					SootMethod temp=i.getMethod(sm.getName(),sm.getParameterTypes());
-					if(temp.isFinal()) break;
-					if(!maybeCalling.containsKey(temp))
-						maybeCalling.put(temp, new LinkedList<SootMethod>());
-					maybeCalling.get(temp).add(sm);
-				}
-			}
+			getSuperInterfaces(sc,sm,maybeCalling);
 			if(!maybeCalling.containsKey(sm)) {
 				maybeCalling.put(sm, new LinkedList<SootMethod>());
 				maybeCalling.get(sm).add(sm);
 			}
 			while(sc.hasSuperclass()) {
-				System.out.println(sc.getSuperclass()+":"+sc);
 				sc=sc.getSuperclass();
+				getSuperInterfaces(sc,sm,maybeCalling);
 				if(!sc.declaresMethod(sm.getName(),sm.getParameterTypes())) {
 					continue;
 				}
@@ -68,7 +72,10 @@ public class WholeProgramTransformer extends SceneTransformer {
 			}
 			methodsBodies.get(sm).add(sm.getActiveBody());
 			if (sm.hasActiveBody()) {
+				debugInfo.append("------------");
+				debugInfo.append("function:" + sm.getDeclaringClass().toString() + "::" + sm.getName() + '\n');
 				for (Unit u : sm.getActiveBody().getUnits()) {
+					debugInfo.append(u.toString() + '\n' + "\t\t" + u.getClass().toString() + '\n');
 					if (u instanceof InvokeStmt) {
 						InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
 						if (ie.getMethod().toString().equals
@@ -121,6 +128,8 @@ public class WholeProgramTransformer extends SceneTransformer {
 				}
 			}
 		}
+		debugInfo.flush();
+		debugInfo.close();
 		try {
 			System.out.println(callingPos.size());
 			System.out.println(callingCnt);
@@ -142,14 +151,11 @@ public class WholeProgramTransformer extends SceneTransformer {
 				System.out.println(sm.toString());
 				int callingTemp = callingCnt;
 				if (sm.hasActiveBody()) {
-					debugInfo.append("------------");
-					debugInfo.append("function:" + sm.getDeclaringClass().toString() + "::" + sm.getName() + '\n');
 					for (Body b : methodsBodies.get(sm)) {
 						callingTemp = callingCnt;
 						for (Unit u : b.getUnits()) {
 //						System.out.println("S: " + u);
 //						System.out.println(u.getClass());
-							debugInfo.append(u.toString() + '\n' + "\t\t" + u.getClass().toString() + '\n');
 							if (u instanceof InvokeStmt) {
 								InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
 								if (ie.getMethod().toString().equals
@@ -165,7 +171,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 									int id = ((IntConstant) ie.getArgs().get(0)).value;
 									queries.get(id).add(v);
 								} else {
-									System.out.println("Method::" + ie.toString());
+									System.out.println("Method::" + ie.getMethod());
 									if (maybeCalling.containsKey(ie.getMethod())) {
 										for (Body body : callingPos.get(callingTemp)) {
 											if (ie.getArgs().size() > 0) {
@@ -228,21 +234,21 @@ public class WholeProgramTransformer extends SceneTransformer {
 											calling.get(m.getActiveBody()).add((Object) sie.getBase());
 										}
 										if (!m.isStatic() && ie instanceof VirtualInvokeExpr) {
-											if (!calling.containsKey(m.getActiveBody())) {
-												calling.put(m.getActiveBody(), new LinkedList<Object>());
-											}
 											VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
 											System.out.println("9: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass()
 													+ ":" + sie.getBase() + ":" + m);
-											calling.get(m.getActiveBody()).add((Object) sie.getBase());
-										}
-										if (!m.isStatic() && ie instanceof InterfaceInvokeExpr) {
 											if (!calling.containsKey(m.getActiveBody())) {
 												calling.put(m.getActiveBody(), new LinkedList<Object>());
 											}
+											calling.get(m.getActiveBody()).add((Object) sie.getBase());
+										}
+										if (!m.isStatic() && ie instanceof InterfaceInvokeExpr) {
 											InterfaceInvokeExpr sie = (InterfaceInvokeExpr) ie;
 											System.out.println("13: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass()
 													+ ":" + sie.getBase() + ":" + m);
+											if (!calling.containsKey(m.getActiveBody())) {
+												calling.put(m.getActiveBody(), new LinkedList<Object>());
+											}
 											calling.get(m.getActiveBody()).add((Object) sie.getBase());
 										}
 									}
@@ -259,8 +265,6 @@ public class WholeProgramTransformer extends SceneTransformer {
 								} else if (lop instanceof Local && rop instanceof Local) {
 									anderson.addAssignConstraint((Object) rop, (Object) lop);
 									cfl.addAssign((Object) rop, (Object) lop);
-									System.out.println(rop.toString() + rop.getType().toString() + " " +
-											lop.toString() + lop.getType().toString());
 								} else if (lop instanceof Local && rop instanceof FieldRef) {
 									if (rop instanceof AbstractInstanceFieldRef) {
 										AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) rop;
@@ -355,9 +359,6 @@ public class WholeProgramTransformer extends SceneTransformer {
 								} else if (lop instanceof Local && rop instanceof ParameterRef) {
 									anderson.addAssignConstraint((Object) rop, (Object) lop);
 									cfl.addAssign((Object) rop, (Object) lop);
-									System.out.println(rop.toString() + rop.getType().toString() + " " +
-											lop.toString() + lop.getType().toString());
-									System.out.println(".................");
 								} else if (lop instanceof Local && rop instanceof ThisRef) {
 									if (calling.containsKey(b)) {
 										for (Object o : calling.get(b)) {
@@ -376,8 +377,6 @@ public class WholeProgramTransformer extends SceneTransformer {
 								if (sm.getReturnType() == null) {
 									System.out.println("!!!!!!!!!!!!");
 								} else {
-									System.out.println("aaaaaaaaaaaaaaa");
-									System.out.println(rs.getOp().toString() + ":" + sm.toString() + ":" + sm.getClass());
 									anderson.addAssignConstraint((Object) rs.getOp(), (Object) b);
 									cfl.addAssign((Object) rs.getOp(), (Object) b);
 								}
@@ -391,51 +390,73 @@ public class WholeProgramTransformer extends SceneTransformer {
 				//}
 			}
 			System.out.println("eeeeee"+callingCnt+"eee"+prevCnt);
-			debugInfo.flush();
-			debugInfo.close();
 			AnswerPrinter printer = new AnswerPrinter("result.txt");
-
-//		anderson.run();
-//		for (Entry<Integer, Object> q : queries.entrySet()) {
-//			System.out.println(q.getKey().intValue());
-//			TreeSet<Integer> result = anderson.getPointsToSet(q.getValue());
-//			if (result == null) {
-//				printer.append(q.getKey().toString() + ":");
-//				for (Integer i : Ids) {
-//					if (i != 0)
-//						printer.append(" " + i);
-//				}
-//				printer.append("\n");
-//			} else {
-//				System.out.println(result.size());
-//				printer.append(q.getKey().toString() + ":");
-//				for (Integer i : result) {
-//					if (i != 0)
-//						printer.append(" " + i);
-//				}
-//				printer.append("\n");
-//			}
-//		}
-			cfl.run(false);
-			for (Entry<Integer, List<Object>> q : queries.entrySet()) {
-				System.out.println(q.getKey().intValue());
-				TreeSet<Integer> result = new TreeSet<Integer>();
-				for (Object o : q.getValue()) {
-					System.out.println(o.toString());
-					TreeSet<Integer> temp = cfl.getPointsToSet(o);
-					if(temp!=null)
-						result.addAll(temp);
+			try {
+				cfl.run(false);
+				for (Entry<Integer, List<Object>> q : queries.entrySet()) {
+					TreeSet<Integer> result = new TreeSet<Integer>();
+					boolean flag=true;
+					for (Object o : q.getValue()) {
+						System.out.println(o.toString());
+						TreeSet<Integer> temp = cfl.getPointsToSet(o);
+						if (temp != null) {
+							result.addAll(temp);
+							flag=false;
+						}
+					}
+					if(flag) {
+						printer.append(q.getKey().toString() + ":");
+						for (Integer i : Ids) {
+							if (i != 0)
+								printer.append(" " + i);
+						}
+						printer.append("\n");
+					}
+					else {
+						System.out.println(result.size());
+						printer.append(q.getKey().toString() + ":");
+						for (Integer i : result) {
+							if (i != 0)
+								printer.append(" " + i);
+						}
+						printer.append("\n");
+					}
 				}
-				System.out.println(result.size());
-				printer.append(q.getKey().toString() + ":");
-				for (Integer i : result) {
-					if (i != 0)
-						printer.append(" " + i);
-				}
-				printer.append("\n");
+				printer.flush();
+				printer.close();
 			}
-			printer.flush();
-			printer.close();
+			catch (Exception e) {
+				anderson.run();
+				for (Entry<Integer, List<Object>> q : queries.entrySet()) {
+					TreeSet<Integer> result = new TreeSet<Integer>();
+					boolean flag=true;
+					for(Object o : q.getValue()) {
+						TreeSet<Integer> temp = anderson.getPointsToSet(o);
+						if(temp!=null) {
+							flag=false;
+							result.addAll(temp);
+						}
+					}
+					if (flag) {
+						printer.append(q.getKey().toString() + ":");
+						for (Integer i : Ids) {
+							if (i != 0)
+								printer.append(" " + i);
+						}
+						printer.append("\n");
+					} else {
+						System.out.println(result.size());
+						printer.append(q.getKey().toString() + ":");
+						for (Integer i : result) {
+							if (i != 0)
+								printer.append(" " + i);
+						}
+						printer.append("\n");
+					}
+				}
+				printer.flush();
+				printer.close();
+			}
 		}
 		catch(Exception e) {
 			System.out.println(e.toString());
