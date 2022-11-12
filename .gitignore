@@ -3,3 +3,6 @@ sootOutput/*
 result.txt
 log.txt
 cflInfo.txt
+cflInfo.dot
+test*
+*.dot

@@ -3,33 +3,228 @@ package pta;
 import java.util.*;
 import java.util.Map.Entry;
 
-import soot.Local;
-import soot.MethodOrMethodContext;
-import soot.Scene;
-import soot.SceneTransformer;
-import soot.SootMethod;
-import soot.Unit;
-import soot.Value;
+import soot.*;
 import soot.jimple.*;
 import soot.jimple.toolkits.callgraph.ReachableMethods;
 import soot.util.queue.QueueReader;
-import soot.jimple.internal.AbstractInstanceFieldRef;
+import javafx.util.Pair;
+import soot.jimple.internal.*;
 
 public class WholeProgramTransformer extends SceneTransformer {
+
+	private void typeAnalysis(Map<Object,List<soot.Type>> possibleTypes) {
+		ReachableMethods reachableMethods = Scene.v().getReachableMethods();
+		QueueReader<MethodOrMethodContext> qr = reachableMethods.listener();
+		Map<SootMethod, List<Object>> calling = new HashMap<SootMethod, List<Object>>();
+		List<Pair<Object,Object>> edges=new LinkedList<Pair<Object,Object>>();
+		while (qr.hasNext()) {
+			SootMethod sm = qr.next().method();
+			//if (sm.toString().contains("Hello")) {
+			//System.out.println(sm);
+			int allocId = 0;
+			if (sm.isJavaLibraryMethod()) {
+//					System.out.println(sm.toString());
+				continue;
+			}
+			if (sm.hasActiveBody()) {
+				for (Unit u : sm.getActiveBody().getUnits()) {
+					if (u instanceof InvokeStmt) {
+						InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
+						if (ie.getMethod().toString().equals
+								("<benchmark.internal.BenchmarkN: void alloc(int)>")||
+								ie.getMethod().toString().equals
+										("<test.BenchmarkN: void alloc(int)>")) {
+						} else if (ie.getMethod().toString().equals
+								("<benchmark.internal.BenchmarkN: void test(int,java.lang.Object)>")||
+								ie.getMethod().toString().equals
+										("<test.BenchmarkN: void test(int,java.lang.Object)>")) {
+						} else {
+							System.out.println("Method::" + ie.toString());
+							if (ie.getArgs().size() > 0) {
+								for (int i = 0; i < ie.getArgs().size(); i++) {
+									Value pr=ie.getMethod().getActiveBody().getParameterRefs().get(i);
+								}
+							}
+							if (!ie.getMethod().isStatic() && ie instanceof SpecialInvokeExpr) {
+								if (!calling.containsKey(ie.getMethod())) {
+									calling.put(ie.getMethod(), new LinkedList<Object>());
+								}
+								SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
+								System.out.println("1: " + ((RefType)((JimpleLocal)sie.getBase()).getType()).getSootClass() + ":"
+										+ sie.getBase() + ":" + ie.getMethod());
+								calling.get(ie.getMethod()).add((Object) sie.getBase());
+							}
+							if (!ie.getMethod().isStatic() && ie instanceof VirtualInvokeExpr) {
+								if (!calling.containsKey(ie.getMethod())) {
+									calling.put(ie.getMethod(), new LinkedList<Object>());
+								}
+								VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
+								System.out.println("9: " + ((RefType)((JimpleLocal)sie.getBase()).getType()).getSootClass()
+										+ ":" + sie.getBase() + ":" + ie.getMethod());
+								calling.get(ie.getMethod()).add((Object) sie.getBase());
+							}
+						}
+					} else if (u instanceof DefinitionStmt) {
+						DefinitionStmt ds = (DefinitionStmt) u;
+						Value rop = ds.getRightOp();
+						Value lop = ds.getLeftOp();
+						if (rop instanceof NewExpr) {
+							NewExpr ne = (NewExpr) rop;
+							if(!possibleTypes.containsKey(lop)) {
+								possibleTypes.put(lop,new LinkedList<soot.Type>());
+							}
+							possibleTypes.get(lop).add(ne.getType());
+						} else if (lop instanceof Local && rop instanceof Local) {
+							edges.add(new Pair<>((Object)rop,(Object)lop));
+						} else if (lop instanceof Local && rop instanceof FieldRef) {
+							if(rop instanceof AbstractInstanceFieldRef) {
+								AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) rop;
+							}
+							else {
+								FieldRef f = (FieldRef) rop;
+								edges.add(new Pair<>((Object)rop,(Object)f));
+								if(!possibleTypes.containsKey(f)) {
+									possibleTypes.put(f,new LinkedList<soot.Type>());
+									possibleTypes.get(f).add(f.getType());
+								}
+								if(!possibleTypes.containsKey(rop)) {
+									possibleTypes.put(rop,new LinkedList<soot.Type>());
+								}
+							}
+						} else if (lop instanceof FieldRef && rop instanceof Local) {
+							if(lop instanceof AbstractInstanceFieldRef) {
+								AbstractInstanceFieldRef f = (AbstractInstanceFieldRef) lop;
+							}
+							else {
+								FieldRef f = (FieldRef) lop;
+								edges.add(new Pair<>((Object)rop,(Object)f));
+							}
+						} else if (lop instanceof FieldRef && rop instanceof FieldRef) {
+						} else if (lop instanceof Local && rop instanceof InvokeStmt) {
+							InvokeStmt is=(InvokeStmt) rop;
+						} else if (lop instanceof Local && rop instanceof InvokeExpr) {
+							InvokeExpr is=(InvokeExpr) rop;
+							List<Value> rp=is.getArgs();
+							for(int i=0;i<is.getMethod().getParameterCount();i++) {
+							}
+							if(is instanceof VirtualInvokeExpr) {
+								if(calling.containsKey(is.getMethod())) {
+									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
+								}
+								else {
+									calling.put(is.getMethod(),new LinkedList<Object>());
+									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
+								}
+							}
+							else {
+							}
+							System.out.println("6:"+is.getClass()+":"+is.toString());
+						} else if(lop instanceof Local && rop instanceof ParameterRef) {
+						} else if(lop instanceof Local && rop instanceof ThisRef) {
+							if(calling.containsKey(sm)) {
+								for(Object o:calling.get(sm)) {
+								}
+							}
+							else {
+							}
+						}
+						else {
+						}
+					} else if(u instanceof ReturnStmt) {
+						ReturnStmt rs=(ReturnStmt) u;
+						if(sm.getReturnType()==null) {
+						}
+						else {
+						}
+					}
+					else {
+					}
+				}
+			}
+		}
+	}
 
 	@Override
 	protected void internalTransform(String arg0, Map<String, String> arg1) {
 		System.out.println(arg0);
-
-		TreeMap<Integer, Object> queries = new TreeMap<Integer, Object>();
-		Map<SootMethod, List<Object>> calling = new HashMap<SootMethod, List<Object>>();
-		Anderson anderson = new Anderson();
-		CFL cfl=new CFL();
-
 		ReachableMethods reachableMethods = Scene.v().getReachableMethods();
 		QueueReader<MethodOrMethodContext> qr = reachableMethods.listener();
 		AnswerPrinter debugInfo = new AnswerPrinter("log.txt");
 		Set<Integer> Ids = new HashSet<Integer>();
+		Map<Object,List<soot.Type>> possibleTypes = new HashMap<Object,List<soot.Type>>();
+		typeAnalysis(possibleTypes);
+		Map<SootMethod, List<SootMethod>> maybeCalling=new HashMap<SootMethod,List<SootMethod>>();
+		while (qr.hasNext()) {
+			SootMethod sm = qr.next().method();
+			if (sm.isJavaLibraryMethod()) {
+				continue;
+			}
+			SootClass sc = sm.getDeclaringClass();
+			if(!maybeCalling.containsKey(sm))
+				maybeCalling.put(sm,new LinkedList<SootMethod>());
+			maybeCalling.get(sm).add(sm);
+			while(sc.hasSuperclass()) {
+				sc=sc.getSuperclass();
+				if(!sc.declaresMethod(sm.getName(),sm.getParameterTypes())) {
+					continue;
+				}
+				SootMethod temp=sc.getMethod(sm.getName(),sm.getParameterTypes());
+				if(temp.isFinal()) break;
+				if(!maybeCalling.containsKey(temp))
+					maybeCalling.put(temp, new LinkedList<SootMethod>());
+				maybeCalling.get(temp).add(sm);
+			}
+			if (sm.hasActiveBody()) {
+				for (Unit u : sm.getActiveBody().getUnits()) {
+					if (u instanceof InvokeStmt) {
+						InvokeExpr ie = ((InvokeStmt) u).getInvokeExpr();
+						if (ie.getMethod().toString().equals
+								("<benchmark.internal.BenchmarkN: void alloc(int)>")||
+								ie.getMethod().toString().equals
+										("<test.BenchmarkN: void alloc(int)>")) {
+						} else if (ie.getMethod().toString().equals
+								("<benchmark.internal.BenchmarkN: void test(int,java.lang.Object)>")||
+								ie.getMethod().toString().equals
+										("<test.BenchmarkN: void test(int,java.lang.Object)>")) {
+						} else {
+							System.out.println("Method::" + ie.toString());
+							if (ie.getArgs().size() > 0&&ie.getMethod().hasActiveBody()) {
+								for (int i = 0; i < ie.getArgs().size(); i++) {
+									Value pr=ie.getMethod().getActiveBody().getParameterRefs().get(i);
+								}
+							}
+							if (!ie.getMethod().isStatic() && ie instanceof SpecialInvokeExpr) {
+								SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
+							}
+							if (!ie.getMethod().isStatic() && ie instanceof VirtualInvokeExpr) {
+								VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
+							}
+						}
+					} else if (u instanceof DefinitionStmt) {
+						DefinitionStmt ds = (DefinitionStmt) u;
+						Value rop = ds.getRightOp();
+						Value lop = ds.getLeftOp();
+						if (lop instanceof Local && rop instanceof InvokeExpr) {
+							InvokeExpr is=(InvokeExpr) rop;
+							List<Value> rp=is.getArgs();
+							if(is.getMethod().hasActiveBody()) {
+								for (int i = 0; i < is.getMethod().getParameterCount(); i++) {
+								}
+							}
+							if(is instanceof VirtualInvokeExpr) {
+							}
+							else {
+							}
+						}
+					}
+				}
+			}
+		}
+		TreeMap<Integer, Object> queries = new TreeMap<Integer, Object>();
+		Map<SootMethod, List<Object>> calling = new HashMap<SootMethod, List<Object>>();
+		Anderson anderson = new Anderson();
+		CFL cfl=new CFL();
+		qr = reachableMethods.listener();
 		while (qr.hasNext()) {
 			SootMethod sm = qr.next().method();
 			//if (sm.toString().contains("Hello")) {
@@ -67,30 +262,67 @@ public class WholeProgramTransformer extends SceneTransformer {
 							queries.put(id, (Object) v);
 						} else {
 							System.out.println("Method::" + ie.toString());
-							if (ie.getArgs().size() > 0) {
-								for (int i = 0; i < ie.getArgs().size(); i++) {
-									Value pr=ie.getMethod().getActiveBody().getParameterRefs().get(i);
-									anderson.addAssignConstraint((Object) ie.getArg(i), (Object) pr);
-									cfl.addAssign((Object) ie.getArg(i), (Object) pr);
-									System.out.println("5:"+ie.getArg(i).toString() + " " +pr.toString());
-									System.out.println(pr.getClass().toString());
+							if(maybeCalling.containsKey(ie.getMethod())) {
+								for (SootMethod m : maybeCalling.get(ie.getMethod())) {
+									if (ie.getArgs().size() > 0 && m.hasActiveBody()) {
+										for (int i = 0; i < ie.getArgs().size(); i++) {
+											Value pr = m.getActiveBody().getParameterRefs().get(i);
+											anderson.addAssignConstraint((Object) ie.getArg(i), (Object) pr);
+											cfl.addAssign((Object) ie.getArg(i), (Object) pr);
+											System.out.println("5:" + ie.getArg(i).toString() + " " + pr.toString());
+											System.out.println(pr.getClass().toString());
+										}
+									}
+									if (!m.isStatic() && ie instanceof SpecialInvokeExpr) {
+										if (!calling.containsKey(m)) {
+											calling.put(m, new LinkedList<Object>());
+										}
+										SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
+										System.out.println("1: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass() + ":"
+												+ sie.getBase() + ":" + m);
+										calling.get(m).add((Object) sie.getBase());
+									}
+									if (!m.isStatic() && ie instanceof VirtualInvokeExpr) {
+										if (!calling.containsKey(m)) {
+											calling.put(m, new LinkedList<Object>());
+										}
+										VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
+										System.out.println("9: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass()
+												+ ":" + sie.getBase() + ":" + m);
+										calling.get(m).add((Object) sie.getBase());
+									}
 								}
 							}
-							if (!ie.getMethod().isStatic() && ie instanceof SpecialInvokeExpr) {
-								if (!calling.containsKey(ie.getMethod())) {
-									calling.put(ie.getMethod(), new LinkedList<Object>());
+							else {
+								System.out.println("10:"+ie.toString());
+								SootMethod m = ie.getMethod();
+								if (ie.getArgs().size() > 0 && m.hasActiveBody()) {
+									for (int i = 0; i < ie.getArgs().size(); i++) {
+										Value pr = m.getActiveBody().getParameterRefs().get(i);
+										anderson.addAssignConstraint((Object) ie.getArg(i), (Object) pr);
+										cfl.addAssign((Object) ie.getArg(i), (Object) pr);
+										System.out.println("5:" + ie.getArg(i).toString() + " " + pr.toString());
+										System.out.println(pr.getClass().toString());
+									}
 								}
-								SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
-								System.out.println("1: " + sie.getBase() + ":" + ie.getMethod());
-								calling.get(ie.getMethod()).add((Object) sie.getBase());
-							}
-							if (!ie.getMethod().isStatic() && ie instanceof VirtualInvokeExpr) {
-								if (!calling.containsKey(ie.getMethod())) {
-									calling.put(ie.getMethod(), new LinkedList<Object>());
+								if (!m.isStatic() && ie instanceof SpecialInvokeExpr) {
+									if (!calling.containsKey(m)) {
+										calling.put(m, new LinkedList<Object>());
+									}
+									SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
+									System.out.println("1: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass() + ":"
+											+ sie.getBase() + ":" + m);
+									calling.get(m).add((Object) sie.getBase());
 								}
-								VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
-								System.out.println("9: " + sie.getBase() + ":" + ie.getMethod());
-								calling.get(ie.getMethod()).add((Object) sie.getBase());
+								if (!m.isStatic() && ie instanceof VirtualInvokeExpr) {
+									if (!calling.containsKey(m)) {
+										calling.put(m, new LinkedList<Object>());
+									}
+									VirtualInvokeExpr sie = (VirtualInvokeExpr) ie;
+									System.out.println("9: " + ((RefType) ((JimpleLocal) sie.getBase()).getType()).getSootClass()
+											+ ":" + sie.getBase() + ":" + m);
+									calling.get(m).add((Object) sie.getBase());
+								}
 							}
 						}
 					} else if (u instanceof DefinitionStmt) {
@@ -139,33 +371,54 @@ public class WholeProgramTransformer extends SceneTransformer {
 							}
 						} else if (lop instanceof FieldRef && rop instanceof FieldRef) {
 							System.out.println("??????????");
-						} else if (lop instanceof Local && rop instanceof InvokeStmt) {
-							InvokeStmt is=(InvokeStmt) rop;
-							anderson.addAssignConstraint((Object) is.getInvokeExpr().getMethod(), (Object) lop);
-							cfl.addAssign((Object) is.getInvokeExpr().getMethod(), (Object) lop);
-							System.out.println("4:"+is.getClass()+":"+is.toString());
 						} else if (lop instanceof Local && rop instanceof InvokeExpr) {
 							InvokeExpr is=(InvokeExpr) rop;
 							List<Value> rp=is.getArgs();
-							for(int i=0;i<is.getMethod().getParameterCount();i++) {
-								anderson.addAssignConstraint((Object) rp.get(i),
-										(Object) is.getMethod().getActiveBody().getParameterLocal(i));
-							}
-							if(is instanceof VirtualInvokeExpr) {
-								if(calling.containsKey(is.getMethod())) {
-									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
-								}
-								else {
-									calling.put(is.getMethod(),new LinkedList<Object>());
-									calling.get(is.getMethod()).add(((VirtualInvokeExpr) is).getBase());
+							if(maybeCalling.containsKey(is.getMethod())) {
+								for (SootMethod m : maybeCalling.get(is.getMethod())) {
+									if (m.hasActiveBody()) {
+										for (int i = 0; i < m.getParameterCount(); i++) {
+											anderson.addAssignConstraint((Object) rp.get(i),
+													(Object) m.getActiveBody().getParameterLocal(i));
+										}
+									}
+									if (is instanceof VirtualInvokeExpr) {
+										if (calling.containsKey(m)) {
+											calling.get(m).add(((VirtualInvokeExpr) is).getBase());
+										} else {
+											calling.put(m, new LinkedList<Object>());
+											calling.get(m).add(((VirtualInvokeExpr) is).getBase());
+										}
+									} else {
+										System.out.println("8:" + is.toString());
+									}
+									anderson.addAssignConstraint((Object) m, (Object) lop);
+									cfl.addAssign((Object) m, (Object) lop);
 								}
 							}
 							else {
-								System.out.println("8:"+is.toString());
+								SootMethod m = is.getMethod();
+								System.out.println("11:"+is);
+								if (m.hasActiveBody()) {
+									for (int i = 0; i < m.getParameterCount(); i++) {
+										anderson.addAssignConstraint((Object) rp.get(i),
+												(Object) m.getActiveBody().getParameterLocal(i));
+									}
+								}
+								if (is instanceof VirtualInvokeExpr) {
+									if (calling.containsKey(m)) {
+										calling.get(m).add(((VirtualInvokeExpr) is).getBase());
+									} else {
+										calling.put(m, new LinkedList<Object>());
+										calling.get(m).add(((VirtualInvokeExpr) is).getBase());
+									}
+								} else {
+									System.out.println("8:" + is.toString());
+								}
+								anderson.addAssignConstraint((Object) m, (Object) lop);
+								cfl.addAssign((Object) m, (Object) lop);
 							}
-							anderson.addAssignConstraint((Object) is.getMethod(), (Object) lop);
-							cfl.addAssign((Object) is.getMethod(), (Object) lop);
-							System.out.println("6:"+is.getClass()+":"+is.toString());
+							System.out.println("6:" + is.getClass() + ":" + is.toString());
 						} else if(lop instanceof Local && rop instanceof ParameterRef) {
 							anderson.addAssignConstraint((Object) rop,(Object) lop);
 							cfl.addAssign((Object) rop,(Object) lop);
@@ -200,7 +453,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 						}
 					}
 					else {
-						System.out.println("???" + u.toString());
+						System.out.println("??????" + u.toString());
 					}
 				}
 			}
@@ -208,10 +461,9 @@ public class WholeProgramTransformer extends SceneTransformer {
 		}
 		debugInfo.flush();
 		debugInfo.close();
-
-		anderson.run();
-		cfl.run();
 		AnswerPrinter printer = new AnswerPrinter("result.txt");
+
+//		anderson.run();
 //		for (Entry<Integer, Object> q : queries.entrySet()) {
 //			System.out.println(q.getKey().intValue());
 //			TreeSet<Integer> result = anderson.getPointsToSet(q.getValue());
@@ -232,6 +484,7 @@ public class WholeProgramTransformer extends SceneTransformer {
 //				printer.append("\n");
 //			}
 //		}
+		cfl.run();
 		for (Entry<Integer, Object> q : queries.entrySet()) {
 			System.out.println(q.getKey().intValue());
 			TreeSet<Integer> result = cfl.getPointsToSet(q.getValue());

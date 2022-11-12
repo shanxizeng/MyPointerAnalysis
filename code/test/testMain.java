@@ -57,6 +57,9 @@ class Base {
     public void setx(A z) {
         x=z;
     }
+    public void sety(A a) {
+        y=a;
+    }
 
     public A getx() {
         return x;
@@ -66,9 +69,6 @@ class Base {
 class C extends Base {
     public A getx() {
         return y;
-    }
-    public void sety(A a) {
-        y=a;
     }
 }
 
@@ -86,9 +86,12 @@ public class testMain {
         A a = new A();
         BenchmarkN.alloc(2);
         Base b=new Base();
-        b.setx(a);
         BenchmarkN.alloc(3);
-        C c=new C();
+        Base c=new C();
+        if(1+1>1) {
+            BenchmarkN.alloc(5);
+            c=new Base();
+        }
         c.sety(a);
         BenchmarkN.alloc(4);
         A x=new A();

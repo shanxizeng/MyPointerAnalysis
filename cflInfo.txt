@@ -1,51 +1,54 @@
-$r1:33
-$r1:45
-@parameter0: int:25
-r9:2
-r5:12
-r0:42
-@parameter0: test.A:9
-r8:18
-@parameter1: java.lang.Object:27
-r1:41
-$r1:47
-i0:20
-r3:8
-r1:5
-$r0:22
-"wpigwegh":23
-r0:37
-@parameter0: test.A:13
-$r0:29
-r7:16
-<test.C: test.A getx()>:17
-<java.lang.System: java.io.PrintStream out>:21
-@parameter0: int:19
-r1:43
-$r2:39
-r0:40
-$r6:15
-$r0:4
-$r4:11
-@parameter0: java.lang.String:24
-$r2:7
-i0:26
+$r6:17
+r0:39
 r0:44
-r0:36
-$r1:38
-r0:31
-"ababababaa":30
+r1:45
+<test.Base: test.A getx()>:20
+i0:29
+r1:31
+<jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String toString()>:51
+$r2:41
+r7:18
+@parameter0: test.A:19
+$r0:32
+"wpigwegh":26
 r0:46
-r0:35
-$r2:34
+$r1:40
+r8:21
+@parameter0: test.A:15
+$r1:36
+r0:49
+$r2:7
+r0:42
+r9:2
+r0:48
+r11:14
+@parameter0: int:22
+$r2:37
+$r5:13
+i0:23
+@parameter0: int:28
+$r0:25
+$r0:4
+r10:11
+r1:5
+r0:38
+r1:43
+<java.lang.System: java.io.PrintStream out>:24
+$r1:47
+"ababababaa":33
+r0:34
 @parameter0: java.lang.String[]:1
-r1:28
-<jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String toString()>:48
-0:32
+$r4:10
+r3:8
+@parameter0: java.lang.String:27
+@parameter1: java.lang.Object:30
+$r1:50
+0:35
 1:3
 2:6
-3:10
-4:14
+3:9
+4:16
+5:12
 1:
 	2:Assign null false
 2:
@@ -53,138 +56,1847 @@ r1:28
 3:
 	4:New null false
 4:
-	31:Assign null false
+	34:Assign null false
 	5:Assign null false
 	3:New null true
 5:
-	13:Assign null false
-	9:Assign null false
+	15:Assign null false
 	4:Assign null true
 6:
 	7:New null false
 7:
-	37:Assign null false
+	48:Assign null false
+	39:Assign null false
 	8:Assign null false
 	6:New null true
 8:
-	42:Assign null false
 	7:Assign null true
 9:
-	43:Assign null false
-	16:Assign null true
-	5:Assign null true
+	10:New null false
 10:
-	11:New null false
+	48:Assign null false
+	11:Assign null false
+	9:New null true
 11:
-	36:Assign null false
-	12:Assign null false
-	10:New null true
+	10:Assign null true
 12:
+	13:New null false
+13:
+	48:Assign null false
+	39:Assign null false
+	14:Assign null false
+	12:New null true
+14:
+	46:Assign null false
 	44:Assign null false
 	42:Assign null false
-	40:Assign null false
-	11:Assign null true
-13:
-	41:Assign null false
-	5:Assign null true
-14:
-	15:New null false
+	13:Assign null true
 15:
-	31:Assign null false
-	16:Assign null false
-	14:New null true
+	43:Assign null false
+	5:Assign null true
 16:
-	9:Assign null false
-	15:Assign null true
+	17:New null false
 17:
-	45:Assign null true
+	34:Assign null false
 	18:Assign null false
+	16:New null true
 18:
+	19:Assign null false
 	17:Assign null true
 19:
-	20:Assign null false
+	45:Assign null false
+	18:Assign null true
 20:
-	19:Assign null true
-21:
-	29:Assign null false
-	22:Assign null false
-22:
-	21:Assign null true
-23:
-	24:Assign null false
-24:
-	30:Assign null true
-	23:Assign null true
-25:
-	26:Assign null false
-26:
-	25:Assign null true
-27:
-	28:Assign null false
-28:
-	27:Assign null true
-29:
-	21:Assign null true
-30:
-	24:Assign null false
-31:
-	34:Put <test.A: test.B g> true
-	33:Put <test.A: test.B f> true
-	15:Assign null true
-	4:Assign null true
-32:
-	39:New null false
-	38:New null false
-	34:New null false
-	33:New null false
-33:
-	35:Assign null false
-	31:Put <test.A: test.B f> false
-	32:New null true
-34:
-	35:Assign null false
-	31:Put <test.A: test.B g> false
-	32:New null true
-35:
-	34:Assign null true
-	33:Assign null true
-36:
-	37:Assign null false
-	11:Assign null true
-37:
-	39:Put <test.Base: test.A y> true
-	38:Put <test.Base: test.A x> true
-	36:Assign null true
-	7:Assign null true
-38:
-	37:Put <test.Base: test.A x> false
-	32:New null true
-39:
-	37:Put <test.Base: test.A y> false
-	32:New null true
-40:
-	41:Put <test.Base: test.A y> true
-	12:Assign null true
-41:
-	40:Put <test.Base: test.A y> false
-	13:Assign null true
-42:
-	43:Put <test.Base: test.A x> true
-	12:Assign null true
-	8:Assign null true
-43:
-	42:Put <test.Base: test.A x> false
-	9:Assign null true
-44:
-	45:Get <test.Base: test.A y> false
-	12:Assign null true
-45:
-	17:Assign null false
-	44:Get <test.Base: test.A y> true
-46:
-	47:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> false
-47:
-	48:Assign null false
-	46:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> true
-48:
 	47:Assign null true
+	21:Assign null false
+21:
+	20:Assign null true
+22:
+	23:Assign null false
+23:
+	22:Assign null true
+24:
+	32:Assign null false
+	25:Assign null false
+25:
+	24:Assign null true
+26:
+	27:Assign null false
+27:
+	33:Assign null true
+	26:Assign null true
+28:
+	29:Assign null false
+29:
+	28:Assign null true
+30:
+	31:Assign null false
+31:
+	30:Assign null true
+32:
+	24:Assign null true
+33:
+	27:Assign null false
+34:
+	48:Assign null false
+	39:Assign null false
+	38:Assign null false
+	37:Put <test.A: test.B g> true
+	36:Put <test.A: test.B f> true
+	17:Assign null true
+	4:Assign null true
+35:
+	41:New null false
+	40:New null false
+	37:New null false
+	36:New null false
+36:
+	38:Assign null false
+	34:Put <test.A: test.B f> false
+	35:New null true
+37:
+	38:Assign null false
+	34:Put <test.A: test.B g> false
+	35:New null true
+38:
+	48:Assign null false
+	39:Assign null false
+	37:Assign null true
+	36:Assign null true
+	34:Assign null true
+39:
+	48:Assign null false
+	41:Put <test.Base: test.A y> true
+	40:Put <test.Base: test.A x> true
+	38:Assign null true
+	34:Assign null true
+	13:Assign null true
+	7:Assign null true
+40:
+	39:Put <test.Base: test.A x> false
+	35:New null true
+41:
+	39:Put <test.Base: test.A y> false
+	35:New null true
+42:
+	43:Put <test.Base: test.A y> true
+	14:Assign null true
+43:
+	42:Put <test.Base: test.A y> false
+	15:Assign null true
+44:
+	45:Put <test.Base: test.A x> true
+	14:Assign null true
+45:
+	44:Put <test.Base: test.A x> false
+	19:Assign null true
+46:
+	47:Get <test.Base: test.A x> false
+	14:Assign null true
+47:
+	20:Assign null false
+	46:Get <test.Base: test.A x> true
+48:
+	39:Assign null true
+	38:Assign null true
+	34:Assign null true
+	13:Assign null true
+	10:Assign null true
+	7:Assign null true
+49:
+	50:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> false
+50:
+	51:Assign null false
+	49:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> true
+51:
+	50:Assign null true
+$r6:17
+r0:39
+r0:44
+r1:45
+<test.Base: test.A getx()>:20
+i0:29
+r1:31
+<jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String toString()>:51
+$r2:41
+r7:18
+@parameter0: test.A:19
+$r0:32
+"wpigwegh":26
+r0:46
+$r1:40
+r8:21
+@parameter0: test.A:15
+$r1:36
+r0:49
+$r2:7
+r0:42
+r9:2
+r0:48
+r11:14
+@parameter0: int:22
+$r2:37
+$r5:13
+i0:23
+@parameter0: int:28
+$r0:25
+$r0:4
+r10:11
+r1:5
+r0:38
+r1:43
+<java.lang.System: java.io.PrintStream out>:24
+$r1:47
+"ababababaa":33
+r0:34
+@parameter0: java.lang.String[]:1
+$r4:10
+r3:8
+@parameter0: java.lang.String:27
+@parameter1: java.lang.Object:30
+$r1:50
+0:35
+1:3
+2:6
+3:9
+4:16
+5:12
+1:
+	2:Point1 null true
+	2:Flow1 null false
+	1:Point1 null true
+	1:Point1 null false
+	1:Flow1 null true
+	1:Flow1 null false
+	2:Assign null false
+2:
+	1:Point1 null false
+	1:Flow1 null true
+	2:Point1 null true
+	2:Point1 null false
+	2:Flow1 null true
+	2:Flow1 null false
+	1:Assign null true
+3:
+	43:FlowTo null false
+	48:FlowTo null false
+	39:FlowTo null false
+	38:FlowTo null false
+	15:FlowTo null false
+	48:PointTo null true
+	43:PointTo null true
+	39:PointTo null true
+	38:PointTo null true
+	34:PointTo null true
+	34:FlowTo null false
+	15:PointTo null true
+	5:PointTo null true
+	5:FlowTo null false
+	4:PointTo null true
+	4:FlowTo null false
+	3:Point1 null true
+	3:Point1 null false
+	3:Flow1 null true
+	3:Flow1 null false
+	4:New null false
+4:
+	43:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	15:Alias null false
+	48:Alias null true
+	43:Alias null true
+	43:Flow1 null false
+	39:Alias null true
+	38:Alias null true
+	34:Alias null true
+	34:Alias null false
+	15:Alias null true
+	5:Alias null true
+	5:Alias null false
+	48:Flow1 null false
+	39:Flow1 null false
+	38:Flow1 null false
+	15:Flow1 null false
+	4:Alias null true
+	4:Alias null false
+	48:Point1 null true
+	43:Point1 null true
+	39:Point1 null true
+	38:Point1 null true
+	34:Point1 null true
+	34:Flow1 null false
+	15:Point1 null true
+	5:Point1 null true
+	5:Flow1 null false
+	3:PointTo null false
+	3:FlowTo null true
+	4:Point1 null true
+	4:Point1 null false
+	4:Flow1 null true
+	4:Flow1 null false
+	34:Assign null false
+	5:Assign null false
+	3:New null true
+5:
+	43:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	15:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	4:Alias null false
+	34:Alias null false
+	4:Alias null true
+	5:Alias null true
+	5:Alias null false
+	15:Alias null true
+	34:Alias null true
+	38:Alias null true
+	39:Alias null true
+	43:Alias null true
+	48:Alias null true
+	43:Flow1 null false
+	3:PointTo null false
+	3:FlowTo null true
+	43:Point1 null true
+	15:Point1 null true
+	15:Flow1 null false
+	4:Point1 null false
+	4:Flow1 null true
+	5:Point1 null true
+	5:Point1 null false
+	5:Flow1 null true
+	5:Flow1 null false
+	15:Assign null false
+	4:Assign null true
+6:
+	48:PointTo null true
+	48:FlowTo null false
+	39:PointTo null true
+	39:FlowTo null false
+	8:PointTo null true
+	8:FlowTo null false
+	7:PointTo null true
+	7:FlowTo null false
+	6:Point1 null true
+	6:Point1 null false
+	6:Flow1 null true
+	6:Flow1 null false
+	7:New null false
+7:
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null true
+	48:Alias null false
+	39:Alias null true
+	39:Alias null false
+	8:Alias null true
+	8:Alias null false
+	7:Alias null true
+	7:Alias null false
+	48:Point1 null true
+	48:Flow1 null false
+	39:Point1 null true
+	39:Flow1 null false
+	8:Point1 null true
+	8:Flow1 null false
+	6:PointTo null false
+	6:FlowTo null true
+	7:Point1 null true
+	7:Point1 null false
+	7:Flow1 null true
+	7:Flow1 null false
+	48:Assign null false
+	39:Assign null false
+	8:Assign null false
+	6:New null true
+8:
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	7:Alias null false
+	39:Alias null false
+	48:Alias null false
+	7:Alias null true
+	8:Alias null true
+	8:Alias null false
+	39:Alias null true
+	48:Alias null true
+	6:PointTo null false
+	6:FlowTo null true
+	7:Point1 null false
+	7:Flow1 null true
+	8:Point1 null true
+	8:Point1 null false
+	8:Flow1 null true
+	8:Flow1 null false
+	7:Assign null true
+9:
+	48:PointTo null true
+	48:FlowTo null false
+	11:PointTo null true
+	11:FlowTo null false
+	10:PointTo null true
+	10:FlowTo null false
+	9:Point1 null true
+	9:Point1 null false
+	9:Flow1 null true
+	9:Flow1 null false
+	10:New null false
+10:
+	48:Alias null true
+	48:Alias null false
+	11:Alias null true
+	11:Alias null false
+	10:Alias null true
+	10:Alias null false
+	48:Point1 null true
+	48:Flow1 null false
+	11:Point1 null true
+	11:Flow1 null false
+	9:PointTo null false
+	9:FlowTo null true
+	10:Point1 null true
+	10:Point1 null false
+	10:Flow1 null true
+	10:Flow1 null false
+	48:Assign null false
+	11:Assign null false
+	9:New null true
+11:
+	10:Alias null false
+	48:Alias null false
+	10:Alias null true
+	11:Alias null true
+	11:Alias null false
+	48:Alias null true
+	9:PointTo null false
+	9:FlowTo null true
+	10:Point1 null false
+	10:Flow1 null true
+	11:Point1 null true
+	11:Point1 null false
+	11:Flow1 null true
+	11:Flow1 null false
+	10:Assign null true
+12:
+	46:FlowTo null false
+	44:FlowTo null false
+	42:FlowTo null false
+	48:PointTo null true
+	48:FlowTo null false
+	46:PointTo null true
+	44:PointTo null true
+	42:PointTo null true
+	39:PointTo null true
+	39:FlowTo null false
+	14:PointTo null true
+	14:FlowTo null false
+	13:PointTo null true
+	13:FlowTo null false
+	12:Point1 null true
+	12:Point1 null false
+	12:Flow1 null true
+	12:Flow1 null false
+	13:New null false
+13:
+	47:Flow3 <test.Base: test.A x> false
+	45:Point3 <test.Base: test.A x> false
+	43:Point3 <test.Base: test.A y> false
+	46:Alias null false
+	44:Alias null false
+	42:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null true
+	48:Alias null false
+	46:Alias null true
+	44:Alias null true
+	42:Alias null true
+	39:Alias null true
+	39:Alias null false
+	14:Alias null true
+	14:Alias null false
+	46:Flow1 null false
+	44:Flow1 null false
+	42:Flow1 null false
+	13:Alias null true
+	13:Alias null false
+	48:Point1 null true
+	48:Flow1 null false
+	46:Point1 null true
+	44:Point1 null true
+	42:Point1 null true
+	39:Point1 null true
+	39:Flow1 null false
+	14:Point1 null true
+	14:Flow1 null false
+	12:PointTo null false
+	12:FlowTo null true
+	13:Point1 null true
+	13:Point1 null false
+	13:Flow1 null true
+	13:Flow1 null false
+	48:Assign null false
+	39:Assign null false
+	14:Assign null false
+	12:New null true
+14:
+	47:Flow3 <test.Base: test.A x> false
+	45:Point3 <test.Base: test.A x> false
+	43:Point3 <test.Base: test.A y> false
+	46:Alias null false
+	44:Alias null false
+	42:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	13:Alias null false
+	39:Alias null false
+	48:Alias null false
+	13:Alias null true
+	14:Alias null true
+	14:Alias null false
+	39:Alias null true
+	42:Alias null true
+	44:Alias null true
+	46:Alias null true
+	48:Alias null true
+	12:PointTo null false
+	12:FlowTo null true
+	46:Point1 null true
+	46:Flow1 null false
+	44:Point1 null true
+	44:Flow1 null false
+	42:Point1 null true
+	42:Flow1 null false
+	13:Point1 null false
+	13:Flow1 null true
+	14:Point1 null true
+	14:Point1 null false
+	14:Flow1 null true
+	14:Flow1 null false
+	46:Assign null false
+	44:Assign null false
+	42:Assign null false
+	13:Assign null true
+15:
+	43:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	4:Alias null true
+	5:Alias null true
+	48:Alias null true
+	43:Alias null true
+	39:Alias null true
+	38:Alias null true
+	34:Alias null true
+	4:Alias null false
+	34:Alias null false
+	15:Alias null true
+	15:Alias null false
+	3:FlowTo null true
+	5:Alias null false
+	3:PointTo null false
+	4:Flow1 null true
+	43:Point1 null true
+	43:Flow1 null false
+	5:Point1 null false
+	4:Point1 null false
+	5:Flow1 null true
+	15:Point1 null true
+	15:Point1 null false
+	15:Flow1 null true
+	15:Flow1 null false
+	43:Assign null false
+	5:Assign null true
+16:
+	47:FlowTo null false
+	21:FlowTo null false
+	20:FlowTo null false
+	21:PointTo null true
+	20:PointTo null true
+	47:PointTo null true
+	45:FlowTo null false
+	48:FlowTo null false
+	39:FlowTo null false
+	38:FlowTo null false
+	19:FlowTo null false
+	48:PointTo null true
+	45:PointTo null true
+	39:PointTo null true
+	38:PointTo null true
+	34:PointTo null true
+	34:FlowTo null false
+	19:PointTo null true
+	18:PointTo null true
+	18:FlowTo null false
+	17:PointTo null true
+	17:FlowTo null false
+	16:Point1 null true
+	16:Point1 null false
+	16:Flow1 null true
+	16:Flow1 null false
+	17:New null false
+17:
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	21:Alias null true
+	47:Flow1 null false
+	21:Flow1 null false
+	20:Flow1 null false
+	20:Alias null true
+	21:Point1 null true
+	47:Alias null true
+	20:Point1 null true
+	47:Point1 null true
+	45:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	19:Alias null false
+	48:Alias null true
+	45:Alias null true
+	45:Flow1 null false
+	39:Alias null true
+	38:Alias null true
+	34:Alias null true
+	34:Alias null false
+	19:Alias null true
+	18:Alias null true
+	18:Alias null false
+	48:Flow1 null false
+	39:Flow1 null false
+	38:Flow1 null false
+	19:Flow1 null false
+	17:Alias null true
+	17:Alias null false
+	48:Point1 null true
+	45:Point1 null true
+	39:Point1 null true
+	38:Point1 null true
+	34:Point1 null true
+	34:Flow1 null false
+	19:Point1 null true
+	18:Point1 null true
+	18:Flow1 null false
+	16:PointTo null false
+	16:FlowTo null true
+	17:Point1 null true
+	17:Point1 null false
+	17:Flow1 null true
+	17:Flow1 null false
+	34:Assign null false
+	18:Assign null false
+	16:New null true
+18:
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	21:Alias null true
+	20:Alias null true
+	47:Flow1 null false
+	21:Flow1 null false
+	20:Flow1 null false
+	21:Point1 null true
+	47:Alias null true
+	20:Point1 null true
+	47:Point1 null true
+	45:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	19:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	17:Alias null false
+	34:Alias null false
+	17:Alias null true
+	18:Alias null true
+	18:Alias null false
+	19:Alias null true
+	34:Alias null true
+	38:Alias null true
+	39:Alias null true
+	45:Alias null true
+	48:Alias null true
+	45:Flow1 null false
+	16:PointTo null false
+	16:FlowTo null true
+	45:Point1 null true
+	19:Point1 null true
+	19:Flow1 null false
+	17:Point1 null false
+	17:Flow1 null true
+	18:Point1 null true
+	18:Point1 null false
+	18:Flow1 null true
+	18:Flow1 null false
+	19:Assign null false
+	17:Assign null true
+19:
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	21:Alias null true
+	20:Alias null true
+	47:Alias null true
+	21:Point1 null true
+	47:Flow1 null false
+	21:Flow1 null false
+	20:Flow1 null false
+	20:Point1 null true
+	47:Point1 null true
+	45:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	17:Alias null true
+	18:Alias null true
+	48:Alias null true
+	45:Alias null true
+	39:Alias null true
+	38:Alias null true
+	34:Alias null true
+	17:Alias null false
+	34:Alias null false
+	19:Alias null true
+	19:Alias null false
+	16:FlowTo null true
+	18:Alias null false
+	16:PointTo null false
+	17:Flow1 null true
+	45:Point1 null true
+	45:Flow1 null false
+	18:Point1 null false
+	17:Point1 null false
+	18:Flow1 null true
+	19:Point1 null true
+	19:Point1 null false
+	19:Flow1 null true
+	19:Flow1 null false
+	45:Assign null false
+	18:Assign null true
+20:
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	45:Alias null true
+	16:FlowTo null true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	17:Flow1 null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	17:Alias null false
+	18:Alias null false
+	34:Alias null false
+	19:Alias null false
+	45:Alias null false
+	36:Alias null true
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	38:Alias null true
+	39:Alias null true
+	48:Alias null true
+	47:Alias null true
+	21:Alias null true
+	18:Flow1 null true
+	36:Alias null false
+	37:Alias null false
+	40:Alias null false
+	41:Alias null false
+	38:Alias null false
+	39:Alias null false
+	48:Alias null false
+	20:Alias null true
+	20:Alias null false
+	21:Alias null false
+	47:Alias null false
+	16:PointTo null false
+	35:FlowTo null true
+	19:Flow1 null true
+	35:PointTo null false
+	45:Point1 null false
+	18:Point1 null false
+	17:Point1 null false
+	19:Point1 null false
+	40:Flow1 null true
+	45:Flow1 null true
+	40:Point1 null false
+	47:Point1 null false
+	47:Flow1 null true
+	21:Point1 null true
+	21:Flow1 null false
+	20:Point1 null true
+	20:Point1 null false
+	20:Flow1 null true
+	20:Flow1 null false
+	47:Assign null true
+	21:Assign null false
+21:
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	45:Alias null true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	16:FlowTo null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	17:Alias null false
+	18:Alias null false
+	34:Alias null false
+	19:Alias null false
+	45:Alias null false
+	17:Flow1 null true
+	36:Alias null false
+	37:Alias null false
+	40:Alias null false
+	41:Alias null false
+	38:Alias null false
+	39:Alias null false
+	48:Alias null false
+	16:PointTo null false
+	47:Alias null false
+	36:Alias null true
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	38:Alias null true
+	39:Alias null true
+	48:Alias null true
+	47:Alias null true
+	21:Alias null true
+	21:Alias null false
+	20:Alias null false
+	18:Flow1 null true
+	35:PointTo null false
+	20:Alias null true
+	45:Point1 null false
+	18:Point1 null false
+	17:Point1 null false
+	19:Point1 null false
+	35:FlowTo null true
+	19:Flow1 null true
+	40:Point1 null false
+	40:Flow1 null true
+	45:Flow1 null true
+	47:Point1 null false
+	47:Flow1 null true
+	20:Point1 null false
+	20:Flow1 null true
+	21:Point1 null true
+	21:Point1 null false
+	21:Flow1 null true
+	21:Flow1 null false
+	20:Assign null true
+22:
+	23:Point1 null true
+	23:Flow1 null false
+	22:Point1 null true
+	22:Point1 null false
+	22:Flow1 null true
+	22:Flow1 null false
+	23:Assign null false
+23:
+	22:Point1 null false
+	22:Flow1 null true
+	23:Point1 null true
+	23:Point1 null false
+	23:Flow1 null true
+	23:Flow1 null false
+	22:Assign null true
+24:
+	32:Point1 null true
+	32:Flow1 null false
+	25:Point1 null true
+	25:Flow1 null false
+	24:Point1 null true
+	24:Point1 null false
+	24:Flow1 null true
+	24:Flow1 null false
+	32:Assign null false
+	25:Assign null false
+25:
+	24:Point1 null false
+	24:Flow1 null true
+	25:Point1 null true
+	25:Point1 null false
+	25:Flow1 null true
+	25:Flow1 null false
+	24:Assign null true
+26:
+	27:Point1 null true
+	27:Flow1 null false
+	26:Point1 null true
+	26:Point1 null false
+	26:Flow1 null true
+	26:Flow1 null false
+	27:Assign null false
+27:
+	33:Point1 null false
+	33:Flow1 null true
+	26:Point1 null false
+	26:Flow1 null true
+	27:Point1 null true
+	27:Point1 null false
+	27:Flow1 null true
+	27:Flow1 null false
+	33:Assign null true
+	26:Assign null true
+28:
+	29:Point1 null true
+	29:Flow1 null false
+	28:Point1 null true
+	28:Point1 null false
+	28:Flow1 null true
+	28:Flow1 null false
+	29:Assign null false
+29:
+	28:Point1 null false
+	28:Flow1 null true
+	29:Point1 null true
+	29:Point1 null false
+	29:Flow1 null true
+	29:Flow1 null false
+	28:Assign null true
+30:
+	31:Point1 null true
+	31:Flow1 null false
+	30:Point1 null true
+	30:Point1 null false
+	30:Flow1 null true
+	30:Flow1 null false
+	31:Assign null false
+31:
+	30:Point1 null false
+	30:Flow1 null true
+	31:Point1 null true
+	31:Point1 null false
+	31:Flow1 null true
+	31:Flow1 null false
+	30:Assign null true
+32:
+	24:Point1 null false
+	24:Flow1 null true
+	32:Point1 null true
+	32:Point1 null false
+	32:Flow1 null true
+	32:Flow1 null false
+	24:Assign null true
+33:
+	27:Point1 null true
+	27:Flow1 null false
+	33:Point1 null true
+	33:Point1 null false
+	33:Flow1 null true
+	33:Flow1 null false
+	27:Assign null false
+34:
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	21:Alias null true
+	20:Alias null true
+	47:Alias null true
+	45:Alias null false
+	43:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	38:Alias null false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	17:Alias null false
+	19:Alias null false
+	17:Alias null true
+	45:Alias null true
+	4:Alias null false
+	15:Alias null false
+	4:Alias null true
+	34:Alias null true
+	34:Alias null false
+	38:Alias null true
+	39:Alias null true
+	43:Alias null true
+	48:Alias null true
+	19:Alias null true
+	18:Alias null true
+	18:Alias null false
+	15:Alias null true
+	5:Alias null true
+	5:Alias null false
+	16:PointTo null false
+	16:FlowTo null true
+	3:PointTo null false
+	3:FlowTo null true
+	48:Point1 null true
+	48:Flow1 null false
+	39:Point1 null true
+	39:Flow1 null false
+	38:Point1 null true
+	38:Flow1 null false
+	17:Point1 null false
+	17:Flow1 null true
+	4:Point1 null false
+	4:Flow1 null true
+	34:Point1 null true
+	34:Point1 null false
+	34:Flow1 null true
+	34:Flow1 null false
+	48:Assign null false
+	39:Assign null false
+	38:Assign null false
+	37:Put <test.A: test.B g> true
+	36:Put <test.A: test.B f> true
+	17:Assign null true
+	4:Assign null true
+35:
+	21:PointTo null true
+	47:FlowTo null false
+	21:FlowTo null false
+	20:FlowTo null false
+	20:PointTo null true
+	47:PointTo null true
+	48:FlowTo null false
+	39:FlowTo null false
+	48:PointTo null true
+	39:PointTo null true
+	38:PointTo null true
+	38:FlowTo null false
+	41:PointTo null true
+	41:FlowTo null false
+	40:PointTo null true
+	40:FlowTo null false
+	37:PointTo null true
+	37:FlowTo null false
+	36:PointTo null true
+	36:FlowTo null false
+	35:Point1 null true
+	35:Point1 null false
+	35:Flow1 null true
+	35:Flow1 null false
+	41:New null false
+	40:New null false
+	37:New null false
+	36:New null false
+36:
+	21:Point3 <test.A: test.B f> true
+	20:Point3 <test.A: test.B f> true
+	21:Alias null true
+	47:Point3 <test.A: test.B f> true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	17:Point3 <test.A: test.B f> true
+	45:Point3 <test.A: test.B f> true
+	4:Point3 <test.A: test.B f> true
+	34:Point3 <test.A: test.B f> true
+	38:Point3 <test.A: test.B f> true
+	39:Point3 <test.A: test.B f> true
+	43:Point3 <test.A: test.B f> true
+	48:Point3 <test.A: test.B f> true
+	19:Point3 <test.A: test.B f> true
+	18:Point3 <test.A: test.B f> true
+	15:Point3 <test.A: test.B f> true
+	5:Point3 <test.A: test.B f> true
+	48:Alias null true
+	39:Alias null true
+	38:Alias null true
+	38:Alias null false
+	48:Flow1 null false
+	39:Flow1 null false
+	37:Alias null false
+	40:Alias null false
+	41:Alias null false
+	36:Alias null true
+	36:Alias null false
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	48:Point1 null true
+	39:Point1 null true
+	38:Point1 null true
+	38:Flow1 null false
+	35:PointTo null false
+	35:FlowTo null true
+	36:Point1 null true
+	36:Point1 null false
+	36:Flow1 null true
+	36:Flow1 null false
+	38:Assign null false
+	34:Put <test.A: test.B f> false
+	35:New null true
+37:
+	21:Point3 <test.A: test.B g> true
+	20:Point3 <test.A: test.B g> true
+	21:Alias null true
+	47:Point3 <test.A: test.B g> true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	17:Point3 <test.A: test.B g> true
+	45:Point3 <test.A: test.B g> true
+	4:Point3 <test.A: test.B g> true
+	34:Point3 <test.A: test.B g> true
+	38:Point3 <test.A: test.B g> true
+	39:Point3 <test.A: test.B g> true
+	43:Point3 <test.A: test.B g> true
+	48:Point3 <test.A: test.B g> true
+	19:Point3 <test.A: test.B g> true
+	18:Point3 <test.A: test.B g> true
+	15:Point3 <test.A: test.B g> true
+	5:Point3 <test.A: test.B g> true
+	48:Alias null true
+	39:Alias null true
+	38:Alias null true
+	38:Alias null false
+	48:Flow1 null false
+	39:Flow1 null false
+	40:Alias null false
+	41:Alias null false
+	37:Alias null true
+	37:Alias null false
+	40:Alias null true
+	41:Alias null true
+	36:Alias null true
+	36:Alias null false
+	48:Point1 null true
+	39:Point1 null true
+	38:Point1 null true
+	38:Flow1 null false
+	35:PointTo null false
+	35:FlowTo null true
+	37:Point1 null true
+	37:Point1 null false
+	37:Flow1 null true
+	37:Flow1 null false
+	38:Assign null false
+	34:Put <test.A: test.B g> false
+	35:New null true
+38:
+	21:Alias null true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Alias null true
+	45:Alias null false
+	43:Alias null false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null false
+	39:Alias null false
+	4:Alias null true
+	5:Alias null true
+	15:Alias null true
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	45:Alias null true
+	43:Alias null true
+	36:Alias null false
+	37:Alias null false
+	36:Alias null true
+	37:Alias null true
+	39:Alias null true
+	48:Alias null true
+	4:Alias null false
+	15:Alias null false
+	17:Alias null false
+	19:Alias null false
+	38:Alias null true
+	38:Alias null false
+	3:FlowTo null true
+	16:FlowTo null true
+	34:Alias null false
+	18:Alias null false
+	5:Alias null false
+	41:Alias null true
+	41:Alias null false
+	40:Alias null true
+	40:Alias null false
+	35:PointTo null false
+	35:FlowTo null true
+	3:PointTo null false
+	16:PointTo null false
+	4:Flow1 null true
+	17:Flow1 null true
+	48:Point1 null true
+	48:Flow1 null false
+	39:Point1 null true
+	39:Flow1 null false
+	37:Point1 null false
+	37:Flow1 null true
+	36:Point1 null false
+	36:Flow1 null true
+	34:Point1 null false
+	4:Point1 null false
+	17:Point1 null false
+	34:Flow1 null true
+	38:Point1 null true
+	38:Point1 null false
+	38:Flow1 null true
+	38:Flow1 null false
+	48:Assign null false
+	39:Assign null false
+	37:Assign null true
+	36:Assign null true
+	34:Assign null true
+39:
+	21:Alias null true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Alias null true
+	47:Flow3 <test.Base: test.A x> false
+	45:Alias null false
+	45:Point3 <test.Base: test.A x> false
+	43:Alias null false
+	43:Point3 <test.Base: test.A y> false
+	46:Alias null false
+	44:Alias null false
+	42:Alias null false
+	36:Alias null true
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	4:Alias null true
+	5:Alias null true
+	15:Alias null true
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	38:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	45:Alias null true
+	43:Alias null true
+	36:Alias null false
+	37:Alias null false
+	35:FlowTo null true
+	4:Alias null false
+	15:Alias null false
+	17:Alias null false
+	19:Alias null false
+	3:FlowTo null true
+	16:FlowTo null true
+	13:Alias null false
+	13:Alias null true
+	42:Alias null true
+	44:Alias null true
+	46:Alias null true
+	7:Alias null false
+	48:Alias null false
+	7:Alias null true
+	39:Alias null true
+	39:Alias null false
+	48:Alias null true
+	38:Alias null false
+	34:Alias null false
+	18:Alias null false
+	14:Alias null true
+	14:Alias null false
+	8:Alias null true
+	8:Alias null false
+	5:Alias null false
+	41:Alias null false
+	40:Alias null false
+	35:PointTo null false
+	36:Flow1 null true
+	37:Flow1 null true
+	3:PointTo null false
+	16:PointTo null false
+	4:Flow1 null true
+	17:Flow1 null true
+	12:PointTo null false
+	12:FlowTo null true
+	6:PointTo null false
+	6:FlowTo null true
+	48:Point1 null true
+	48:Flow1 null false
+	38:Point1 null false
+	36:Point1 null false
+	37:Point1 null false
+	38:Flow1 null true
+	34:Point1 null false
+	4:Point1 null false
+	17:Point1 null false
+	34:Flow1 null true
+	13:Point1 null false
+	13:Flow1 null true
+	7:Point1 null false
+	7:Flow1 null true
+	39:Point1 null true
+	39:Point1 null false
+	39:Flow1 null true
+	39:Flow1 null false
+	48:Assign null false
+	41:Put <test.Base: test.A y> true
+	40:Put <test.Base: test.A x> true
+	38:Assign null true
+	34:Assign null true
+	13:Assign null true
+	7:Assign null true
+40:
+	21:Point3 <test.Base: test.A x> true
+	21:Alias null true
+	20:Point3 <test.Base: test.A x> true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Point3 <test.Base: test.A x> true
+	21:Point1 null true
+	47:Alias null true
+	47:Flow1 null false
+	21:Flow1 null false
+	20:Flow1 null false
+	20:Point1 null true
+	47:Flow2 <test.Base: test.A x> false
+	47:Point1 null true
+	36:Point3 <test.Base: test.A x> true
+	37:Point3 <test.Base: test.A x> true
+	40:Point3 <test.Base: test.A x> true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	41:Point3 <test.Base: test.A x> true
+	4:Point3 <test.Base: test.A x> true
+	5:Point3 <test.Base: test.A x> true
+	15:Point3 <test.Base: test.A x> true
+	17:Point3 <test.Base: test.A x> true
+	18:Point3 <test.Base: test.A x> true
+	19:Point3 <test.Base: test.A x> true
+	34:Point3 <test.Base: test.A x> true
+	38:Point3 <test.Base: test.A x> true
+	47:Point2 <test.Base: test.A x> true
+	48:Alias null false
+	45:Point3 <test.Base: test.A x> true
+	43:Point3 <test.Base: test.A x> true
+	39:Alias null false
+	13:Point3 <test.Base: test.A x> true
+	42:Point3 <test.Base: test.A x> true
+	44:Point3 <test.Base: test.A x> true
+	46:Point3 <test.Base: test.A x> true
+	7:Point3 <test.Base: test.A x> true
+	39:Point3 <test.Base: test.A x> true
+	48:Point3 <test.Base: test.A x> true
+	14:Point3 <test.Base: test.A x> true
+	8:Point3 <test.Base: test.A x> true
+	48:Alias null true
+	41:Alias null false
+	38:Alias null false
+	40:Alias null true
+	40:Alias null false
+	41:Alias null true
+	38:Alias null true
+	39:Alias null true
+	37:Alias null true
+	37:Alias null false
+	36:Alias null true
+	36:Alias null false
+	35:PointTo null false
+	35:FlowTo null true
+	40:Point1 null true
+	40:Point1 null false
+	40:Flow1 null true
+	40:Flow1 null false
+	39:Put <test.Base: test.A x> false
+	35:New null true
+41:
+	21:Point3 <test.Base: test.A y> true
+	21:Alias null true
+	20:Point3 <test.Base: test.A y> true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Point3 <test.Base: test.A y> true
+	47:Alias null true
+	36:Point3 <test.Base: test.A y> true
+	37:Point3 <test.Base: test.A y> true
+	40:Point3 <test.Base: test.A y> true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> true
+	41:Point3 <test.Base: test.A y> false
+	4:Point3 <test.Base: test.A y> true
+	5:Point3 <test.Base: test.A y> true
+	15:Point3 <test.Base: test.A y> true
+	17:Point3 <test.Base: test.A y> true
+	18:Point3 <test.Base: test.A y> true
+	19:Point3 <test.Base: test.A y> true
+	34:Point3 <test.Base: test.A y> true
+	38:Point3 <test.Base: test.A y> true
+	48:Alias null false
+	45:Point3 <test.Base: test.A y> true
+	43:Point3 <test.Base: test.A y> true
+	39:Alias null false
+	13:Point3 <test.Base: test.A y> true
+	42:Point3 <test.Base: test.A y> true
+	44:Point3 <test.Base: test.A y> true
+	46:Point3 <test.Base: test.A y> true
+	7:Point3 <test.Base: test.A y> true
+	39:Point3 <test.Base: test.A y> true
+	48:Point3 <test.Base: test.A y> true
+	14:Point3 <test.Base: test.A y> true
+	8:Point3 <test.Base: test.A y> true
+	48:Alias null true
+	38:Alias null false
+	41:Alias null true
+	41:Alias null false
+	38:Alias null true
+	39:Alias null true
+	40:Alias null true
+	40:Alias null false
+	37:Alias null true
+	37:Alias null false
+	36:Alias null true
+	36:Alias null false
+	35:PointTo null false
+	35:FlowTo null true
+	41:Point1 null true
+	41:Point1 null false
+	41:Flow1 null true
+	41:Flow1 null false
+	39:Put <test.Base: test.A y> false
+	35:New null true
+42:
+	47:Flow3 <test.Base: test.A x> false
+	45:Point3 <test.Base: test.A x> false
+	46:Alias null false
+	44:Alias null false
+	43:Point3 <test.Base: test.A y> false
+	13:Alias null true
+	14:Alias null true
+	39:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null true
+	46:Alias null true
+	44:Alias null true
+	13:Alias null false
+	48:Alias null false
+	42:Alias null true
+	42:Alias null false
+	12:FlowTo null true
+	39:Alias null false
+	14:Alias null false
+	12:PointTo null false
+	13:Flow1 null true
+	14:Point1 null false
+	13:Point1 null false
+	14:Flow1 null true
+	42:Point1 null true
+	42:Point1 null false
+	42:Flow1 null true
+	42:Flow1 null false
+	43:Put <test.Base: test.A y> true
+	14:Assign null true
+43:
+	4:Alias null true
+	5:Alias null true
+	15:Alias null true
+	34:Alias null true
+	38:Alias null true
+	39:Alias null true
+	43:Alias null true
+	43:Alias null false
+	48:Alias null true
+	13:Point3 <test.Base: test.A y> true
+	14:Point3 <test.Base: test.A y> true
+	39:Point3 <test.Base: test.A y> true
+	48:Alias null false
+	48:Point3 <test.Base: test.A y> true
+	46:Point3 <test.Base: test.A y> true
+	44:Point3 <test.Base: test.A y> true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	3:FlowTo null true
+	42:Point3 <test.Base: test.A y> true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	4:Alias null false
+	15:Alias null false
+	38:Alias null false
+	39:Alias null false
+	4:Flow1 null true
+	34:Alias null false
+	5:Alias null false
+	3:PointTo null false
+	5:Flow1 null true
+	15:Point1 null false
+	4:Point1 null false
+	5:Point1 null false
+	15:Flow1 null true
+	43:Point1 null true
+	43:Point1 null false
+	43:Flow1 null true
+	43:Flow1 null false
+	42:Put <test.Base: test.A y> false
+	15:Assign null true
+44:
+	47:Flow3 <test.Base: test.A x> false
+	46:Alias null false
+	43:Point3 <test.Base: test.A y> false
+	45:Point3 <test.Base: test.A x> false
+	13:Alias null true
+	14:Alias null true
+	39:Alias null true
+	42:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null true
+	46:Alias null true
+	13:Alias null false
+	48:Alias null false
+	42:Alias null false
+	44:Alias null true
+	44:Alias null false
+	12:FlowTo null true
+	39:Alias null false
+	14:Alias null false
+	12:PointTo null false
+	13:Flow1 null true
+	14:Point1 null false
+	13:Point1 null false
+	14:Flow1 null true
+	44:Point1 null true
+	44:Point1 null false
+	44:Flow1 null true
+	44:Flow1 null false
+	45:Put <test.Base: test.A x> true
+	14:Assign null true
+45:
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	21:Alias null true
+	20:Alias null true
+	21:Point1 null true
+	47:Alias null true
+	20:Point1 null true
+	47:Flow1 null false
+	21:Flow1 null false
+	20:Flow1 null false
+	47:Point1 null true
+	47:Flow2 <test.Base: test.A x> false
+	47:Point2 <test.Base: test.A x> true
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	38:Alias null true
+	39:Alias null true
+	45:Alias null true
+	45:Alias null false
+	48:Alias null true
+	13:Point3 <test.Base: test.A x> true
+	14:Point3 <test.Base: test.A x> true
+	39:Point3 <test.Base: test.A x> true
+	42:Point3 <test.Base: test.A x> true
+	48:Alias null false
+	48:Point3 <test.Base: test.A x> true
+	46:Point3 <test.Base: test.A x> true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	16:FlowTo null true
+	44:Point3 <test.Base: test.A x> true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	17:Alias null false
+	19:Alias null false
+	38:Alias null false
+	39:Alias null false
+	17:Flow1 null true
+	34:Alias null false
+	18:Alias null false
+	16:PointTo null false
+	18:Flow1 null true
+	19:Point1 null false
+	17:Point1 null false
+	18:Point1 null false
+	19:Flow1 null true
+	45:Point1 null true
+	45:Point1 null false
+	45:Flow1 null true
+	45:Flow1 null false
+	44:Put <test.Base: test.A x> false
+	19:Assign null true
+46:
+	43:Point3 <test.Base: test.A y> false
+	45:Point3 <test.Base: test.A x> false
+	47:Flow3 <test.Base: test.A x> false
+	13:Alias null true
+	14:Alias null true
+	39:Alias null true
+	42:Alias null true
+	44:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	48:Alias null true
+	13:Alias null false
+	48:Alias null false
+	42:Alias null false
+	44:Alias null false
+	46:Alias null true
+	46:Alias null false
+	12:FlowTo null true
+	39:Alias null false
+	14:Alias null false
+	12:PointTo null false
+	13:Flow1 null true
+	14:Point1 null false
+	13:Point1 null false
+	14:Flow1 null true
+	46:Point1 null true
+	46:Point1 null false
+	46:Flow1 null true
+	46:Flow1 null false
+	47:Get <test.Base: test.A x> false
+	14:Assign null true
+47:
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	45:Alias null true
+	16:FlowTo null true
+	17:Flow1 null true
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	36:Alias null true
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	38:Alias null true
+	39:Alias null true
+	48:Alias null true
+	47:Alias null true
+	47:Alias null false
+	21:Alias null true
+	21:Alias null false
+	20:Alias null false
+	18:Flow1 null true
+	20:Alias null true
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	17:Alias null false
+	18:Alias null false
+	34:Alias null false
+	19:Alias null false
+	45:Alias null false
+	35:FlowTo null true
+	19:Flow1 null true
+	36:Alias null false
+	37:Alias null false
+	40:Alias null false
+	41:Alias null false
+	38:Alias null false
+	39:Alias null false
+	48:Alias null false
+	16:PointTo null false
+	40:Flow1 null true
+	45:Flow1 null true
+	35:PointTo null false
+	45:Point1 null false
+	18:Point1 null false
+	17:Point1 null false
+	19:Point1 null false
+	40:Flow2 <test.Base: test.A x> true
+	45:Flow2 <test.Base: test.A x> true
+	40:Point1 null false
+	45:Point2 <test.Base: test.A x> false
+	13:Flow3 <test.Base: test.A x> true
+	14:Flow3 <test.Base: test.A x> true
+	39:Flow3 <test.Base: test.A x> true
+	42:Flow3 <test.Base: test.A x> true
+	44:Flow3 <test.Base: test.A x> true
+	40:Point2 <test.Base: test.A x> false
+	48:Flow3 <test.Base: test.A x> true
+	46:Flow3 <test.Base: test.A x> true
+	21:Point1 null true
+	20:Point1 null true
+	20:Flow1 null false
+	21:Flow1 null false
+	47:Point1 null true
+	47:Point1 null false
+	47:Flow1 null true
+	47:Flow1 null false
+	20:Assign null false
+	46:Get <test.Base: test.A x> true
+48:
+	21:Alias null true
+	47:Alias null false
+	21:Alias null false
+	20:Alias null false
+	20:Alias null true
+	47:Alias null true
+	45:Alias null false
+	43:Alias null false
+	36:Alias null true
+	37:Alias null true
+	40:Alias null true
+	41:Alias null true
+	4:Alias null true
+	5:Alias null true
+	15:Alias null true
+	43:Alias null true
+	17:Alias null true
+	18:Alias null true
+	19:Alias null true
+	34:Alias null true
+	38:Alias null true
+	45:Alias null true
+	43:Point3 <test.Base: test.A y> false
+	45:Point3 <test.Base: test.A x> false
+	47:Flow3 <test.Base: test.A x> false
+	40:Point3 <test.Base: test.A x> false
+	41:Point3 <test.Base: test.A y> false
+	36:Point3 <test.A: test.B f> false
+	37:Point3 <test.A: test.B g> false
+	36:Alias null false
+	37:Alias null false
+	40:Alias null false
+	41:Alias null false
+	35:FlowTo null true
+	4:Alias null false
+	15:Alias null false
+	17:Alias null false
+	19:Alias null false
+	3:FlowTo null true
+	16:FlowTo null true
+	13:Alias null false
+	42:Alias null false
+	44:Alias null false
+	46:Alias null false
+	13:Alias null true
+	10:Alias null false
+	10:Alias null true
+	7:Alias null false
+	7:Alias null true
+	48:Alias null true
+	48:Alias null false
+	46:Alias null true
+	44:Alias null true
+	42:Alias null true
+	39:Alias null true
+	39:Alias null false
+	38:Alias null false
+	34:Alias null false
+	18:Alias null false
+	14:Alias null true
+	14:Alias null false
+	11:Alias null true
+	11:Alias null false
+	8:Alias null true
+	8:Alias null false
+	5:Alias null false
+	35:PointTo null false
+	36:Flow1 null true
+	37:Flow1 null true
+	3:PointTo null false
+	16:PointTo null false
+	4:Flow1 null true
+	17:Flow1 null true
+	12:PointTo null false
+	12:FlowTo null true
+	9:PointTo null false
+	9:FlowTo null true
+	6:PointTo null false
+	6:FlowTo null true
+	39:Point1 null false
+	39:Flow1 null true
+	38:Point1 null false
+	36:Point1 null false
+	37:Point1 null false
+	38:Flow1 null true
+	34:Point1 null false
+	4:Point1 null false
+	17:Point1 null false
+	34:Flow1 null true
+	13:Point1 null false
+	13:Flow1 null true
+	10:Point1 null false
+	10:Flow1 null true
+	7:Point1 null false
+	7:Flow1 null true
+	48:Point1 null true
+	48:Point1 null false
+	48:Flow1 null true
+	48:Flow1 null false
+	39:Assign null true
+	38:Assign null true
+	34:Assign null true
+	13:Assign null true
+	10:Assign null true
+	7:Assign null true
+49:
+	49:Point1 null true
+	49:Point1 null false
+	49:Flow1 null true
+	49:Flow1 null false
+	50:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> false
+50:
+	51:Point1 null true
+	51:Flow1 null false
+	50:Point1 null true
+	50:Point1 null false
+	50:Flow1 null true
+	50:Flow1 null false
+	51:Assign null false
+	49:Get <jdk.net.ExtendedSocketOptions$ExtSocketOption: java.lang.String name> true
+51:
+	50:Point1 null false
+	50:Flow1 null true
+	51:Point1 null true
+	51:Point1 null false
+	51:Flow1 null true
+	51:Flow1 null false
+	50:Assign null true

@@ -3,6 +3,7 @@ package pta;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeSet;
+import soot.SootField;
 
 class EdgeType {
     enum type {
@@ -119,6 +120,14 @@ class EdgeType {
             printer.append(Type.toString() + " null " + reversed + "\n");
     }
 
+    void print2(AnswerPrinter printer) {
+        if(f!=null) {
+            printer.append(Type.toString() + ((SootField)f).getName());
+        }
+        else
+            printer.append(Type.toString());
+    }
+
     boolean isVoid() {
         return Type==type.Void;
     }
@@ -171,12 +180,19 @@ class Graph {
         num=new HashMap<Integer,Integer>();
     }
 
-    void print(AnswerPrinter printer, int cnt) {
+    void print(AnswerPrinter printer, AnswerPrinter dotter, int cnt) {
         for (int i = 1; i <= cnt; i++) {
             printer.append(i + ":\n");
             for (int j = first[i]; j != 0; j = nxt[j]) {
                 printer.append("\t" + to[j] + ":");
                 w[j].print(printer);
+                if (!w[j].reversed && (w[j].Type != EdgeType.type.Flow1 && w[j].Type != EdgeType.type.Flow2 &&
+                        w[j].Type != EdgeType.type.Flow3 && w[j].Type != EdgeType.type.Point1 &&
+                        w[j].Type != EdgeType.type.Point2 && w[j].Type != EdgeType.type.Point3)) {
+                    dotter.append(i + "->" + to[j] + "[ label=\"");
+                    w[j].print2(dotter);
+                    dotter.append("\"];" + "\n");
+                }
             }
         }
     }
@@ -287,20 +303,38 @@ public class CFL {
 
     void run() {
         AnswerPrinter printer = new AnswerPrinter("cflInfo.txt");
+        AnswerPrinter dotter = new AnswerPrinter("cflInfo.dot");
+        dotter.append("digraph cfl{\n");
         for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
             printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
         }
         for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
             printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
         }
-        g.print(printer, cnt);
+        g.print(printer, dotter, cnt);
+        dotter.append("}\n");
+        dotter.flush();
+        dotter.close();
         printer.flush();
-        printer.close();
         for (int i = 1; i <= cnt; i++) {
-            g.add1(i, i, new EdgeType(EdgeType.type.Flow1));
-            g.add1(i, i, new EdgeType(EdgeType.type.Point1));
+            g.add2(i, i, new EdgeType(EdgeType.type.Flow1));
+            g.add2(i, i, new EdgeType(EdgeType.type.Point1));
         }
         g.trans();
+        AnswerPrinter dotter2 = new AnswerPrinter("cflInfo2.dot");
+        dotter2.append("digraph cfl{\n");
+        for (Map.Entry<Object, Integer> x : objectId.entrySet()) {
+            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+        }
+        for (Map.Entry<Integer, Integer> x : newId.entrySet()) {
+            printer.append(x.getKey().toString() + ":" + x.getValue() + "\n");
+        }
+        g.print(printer, dotter2, cnt);
+        dotter2.append("}\n");
+        dotter2.flush();
+        printer.flush();
+        printer.close();
+        dotter2.close();
     }
 
     TreeSet<Integer> getPointsToSet(Object local) {
