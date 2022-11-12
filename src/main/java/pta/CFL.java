@@ -337,6 +337,10 @@ public class CFL {
             dotter2.close();
         }
         else {
+            for (int i = 1; i <= cnt; i++) {
+                g.add2(i, i, new EdgeType(EdgeType.type.Flow1));
+                g.add2(i, i, new EdgeType(EdgeType.type.Point1));
+            }
             g.trans();
         }
     }
