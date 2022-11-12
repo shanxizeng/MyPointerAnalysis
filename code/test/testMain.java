@@ -84,11 +84,14 @@ public class testMain {
     public static void main(String[] args) {
         BenchmarkN.alloc(1);
         A a = new A();
+        BenchmarkN.alloc(6);
+        A aa = new A();
         BenchmarkN.alloc(2);
         Base b=new Base();
+        b.setx(aa);
         BenchmarkN.alloc(3);
         Base c=new C();
-        if(1+1>1) {
+        if(args.length>1) {
             BenchmarkN.alloc(5);
             c=new Base();
         }
